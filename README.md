@@ -1,15 +1,12 @@
 # Description of your result
 
-You can describe your results in any language that is convenient for you, not just English.
-
 ## Description
 
-[Describe what you have done]
-
+Добавлена возможность декремента счётчика из стандартного приложения Counter, а также отображение на екране
+количество нажатий каждой кнопки
 ## How to
 
-[Describe how to run your application if there are any issues]
-
+Используя  метод SetState() и переменные для хранения числовых значений.
 ## Problems
 
 [Describe the problems you encountered]
