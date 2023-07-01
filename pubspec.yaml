@@ -10,6 +10,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  flutter_svg: ^2.0.7
+  video_player: ^2.7.0
 
 dev_dependencies:
   flutter_test:
@@ -17,4 +21,13 @@ dev_dependencies:
   flutter_lints: ^2.0.0
 
 flutter:
+
+  fonts:
+    - family: Mefika
+      fonts: 
+        - asset: lib/assets/fonts/mefika-font/Mefika.ttf
+
+  assets:
+    - lib/assets/images/
+
   uses-material-design: true
