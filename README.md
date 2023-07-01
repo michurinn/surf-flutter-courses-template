@@ -1,23 +1,27 @@
 # Description of your result
 
-You can describe your results in any language that is convenient for you, not just English.
+Задание — Визитка
+Создайте приложение-визитку о себе на Flutter в свободном дизайне! Для этого понадобится всего лишь один экран.
+
+За основу можно взять шаблон:
+
+Вверху экрана ваша крутая фотография, добавленная при помощи asset'ов
+ФИО
+Раздел "О себе"
+Раздел "Увлечения"
+Раздел "Опыт в разработке"
+Для каждого из разделов используйте веселые шрифты и svg-иконки, добавленные при помощи `asset`. Не ограничиваете себя, найдите самые любимые и ощутите себя дизайнером!
+
 
 ## Description
 
-[Describe what you have done]
-
+Ресурсы добавлены в приложение с помощью ассетов, также установлен плагин video_player
 ## How to
 
-[Describe how to run your application if there are any issues]
-
 ## Problems
-
-[Describe the problems you encountered]
-
+Забыл использовать svg, при необходимости могу добавить, благодарю за понимание
 ## More
-
-[Here you can brag about what you managed to implement or do something beyond the task]
 
 ## Demo
 
-[Leave links to screencasts/screenshots here, you can use a GitHub repository or a separate cloud service]
+https://disk.yandex.ru/i/3bDe_sJTmf40UA
