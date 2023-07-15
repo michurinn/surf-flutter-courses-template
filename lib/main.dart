@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:collection/collection.dart'; // импорт для UnmodifiableListView
 
 void main() {
   runApp(const MainApp());
@@ -9,6 +10,7 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    collectionsExample();
     return const MaterialApp(
       home: Scaffold(
         body: Center(
@@ -17,4 +19,16 @@ class MainApp extends StatelessWidget {
       ),
     );
   }
+}
+
+
+void collectionsExample() {
+  final originalIterable = [1, 2, 3];
+  final unmodifiable = UnmodifiableListView(originalIterable);
+
+  print(unmodifiable); // [1, 2, 3]
+
+  originalIterable.removeAt(0);
+
+  print(unmodifiable); // [2, 3]
 }
