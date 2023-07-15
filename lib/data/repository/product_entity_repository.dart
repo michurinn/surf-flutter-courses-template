@@ -4,5 +4,5 @@ import 'package:surf_flutter_courses_template/data/domain/product_entity.dart';
 abstract class IProductEntityRepository 
 {
   /// Получить список доступных продуктов
-  List<ProductEntity> getProducts();
+  List<ProductEntity> getProducts({required String receiptId});
 }

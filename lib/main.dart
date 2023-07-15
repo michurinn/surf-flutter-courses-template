@@ -1,27 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:surf_flutter_courses_template/bloc/bloc/receipt_bloc.dart';
+import 'package:surf_flutter_courses_template/data/repository/product_entity_repository.dart';
+import 'package:surf_flutter_courses_template/data/repository/product_entity_repository_current.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:surf_flutter_courses_template/ui/dialogs/receipt_screen.dart';
 
 void main() {
-  runApp(const MainApp());
-}
-
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
+  runApp(RepositoryProvider<IProductEntityRepository>(
+    create: (context) => ProductEntityRepository(),
+    child: BlocProvider<ReceiptBloc>(
+      create: (context) => ReceiptBloc(
+          productEntityRepository: context.read<IProductEntityRepository>())
+        ..add(ReceiptEvent.load(receiptId: '')),
+      child: MaterialApp(
+        home: const ReceiptScreen(
+            receiptId: 'Чек № 56', receiptDate: '24.02.23 в 12:23'),
       ),
-    );
-  }
+    ),
+  ));
 }
-
-
-
-
-
-
-
