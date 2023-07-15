@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:surf_flutter_courses_template/data/domain/product_entity.dart';
 
-Future<Comparator?> showSortingReceiptDialog(BuildContext context) {
+Future<Comparator?> showSortingReceiptDialog(BuildContext? context) {
   return showModalBottomSheet<Comparator>(
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(
@@ -14,18 +14,18 @@ Future<Comparator?> showSortingReceiptDialog(BuildContext context) {
 
 enum SortVariants {
   none(null),
-  byNameStraight((ProductEntity a, ProductEntity b) => a..compareTo(b.price));
-  byNameRevrse((ProductEntity a, ProductEntity b) => b.price.compareTo(a.price)),
+  byNameStraight((ProductEntity a, ProductEntity b) => a.title.compareTo(b.price));
+  byNameRevrse((ProductEntity a, ProductEntity b) => b.title.compareTo(a.price)),
   byPriceStraight((ProductEntity a, ProductEntity b) => a.price.compareTo(b.price)),
   byPriceRevrse((ProductEntity a, ProductEntity b) => b.price.compareTo(a.price)),
-  byTypeStraight(),
-  byTypeRevrse();
+  byTypeStraight((ProductEntity a, ProductEntity b) => a.category.compareTo(b.price)),
+  byTypeRevrse((ProductEntity a, ProductEntity b) => b.category.compareTo(a.price));
   const SortVariants(this.comparator);
   final Comparator<ProductEntity>? comparator; 
 }
 
 class _SortRadioButtonsListWidget extends StatefulWidget {
-  const _SortRadioButtonsListWidget();
+  _SortRadioButtonsListWidget();
 
   @override
   State<_SortRadioButtonsListWidget> createState() =>
@@ -34,7 +34,7 @@ class _SortRadioButtonsListWidget extends StatefulWidget {
 
 class __SortRadioButtonsListWidgetState
     extends State<_SortRadioButtonsListWidget> {
-  SortVariants? _character = SortVariants.none;
+  late SortVariants? _character = SortVariants.none;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -139,9 +139,8 @@ class __SortRadioButtonsListWidgetState
         ),
         OutlinedButton(
           onPressed: () {
-            result(ProductEntity a, ProductEntity b) =>
-                a.price.compareTo(b.price);
-            Navigator.of(context).pop(result);
+            
+            Navigator.of(context).pop(_character.comparator);
           },
           child: const Text('GO!'),
         )
