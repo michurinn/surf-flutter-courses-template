@@ -433,8 +433,8 @@ class __$$_LoadingCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Loading implements _Loading {
-  const _$_Loading();
+class _$_Loading extends _Loading {
+  const _$_Loading() : super._();
 
   @override
   String toString() {
@@ -532,8 +532,9 @@ class _$_Loading implements _Loading {
   }
 }
 
-abstract class _Loading implements ReceiptState {
+abstract class _Loading extends ReceiptState {
   const factory _Loading() = _$_Loading;
+  const _Loading._() : super._();
 }
 
 /// @nodoc
@@ -552,8 +553,8 @@ class __$$_EmptyCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Empty implements _Empty {
-  const _$_Empty();
+class _$_Empty extends _Empty {
+  const _$_Empty() : super._();
 
   @override
   String toString() {
@@ -651,8 +652,9 @@ class _$_Empty implements _Empty {
   }
 }
 
-abstract class _Empty implements ReceiptState {
+abstract class _Empty extends ReceiptState {
   const factory _Empty() = _$_Empty;
+  const _Empty._() : super._();
 }
 
 /// @nodoc
@@ -686,9 +688,10 @@ class __$$_LoadedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Loaded implements _Loaded {
+class _$_Loaded extends _Loaded {
   const _$_Loaded({required final List<ProductEntity> productEntityList})
-      : _productEntityList = productEntityList;
+      : _productEntityList = productEntityList,
+        super._();
 
   final List<ProductEntity> _productEntityList;
   @override
@@ -805,9 +808,10 @@ class _$_Loaded implements _Loaded {
   }
 }
 
-abstract class _Loaded implements ReceiptState {
+abstract class _Loaded extends ReceiptState {
   const factory _Loaded(
       {required final List<ProductEntity> productEntityList}) = _$_Loaded;
+  const _Loaded._() : super._();
 
   List<ProductEntity> get productEntityList;
   @JsonKey(ignore: true)
@@ -846,9 +850,10 @@ class __$$_SortedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Sorted implements _Sorted {
+class _$_Sorted extends _Sorted {
   const _$_Sorted({required final List<ProductEntity> productEntityList})
-      : _productEntityList = productEntityList;
+      : _productEntityList = productEntityList,
+        super._();
 
   final List<ProductEntity> _productEntityList;
   @override
@@ -965,9 +970,10 @@ class _$_Sorted implements _Sorted {
   }
 }
 
-abstract class _Sorted implements ReceiptState {
+abstract class _Sorted extends ReceiptState {
   const factory _Sorted(
       {required final List<ProductEntity> productEntityList}) = _$_Sorted;
+  const _Sorted._() : super._();
 
   List<ProductEntity> get productEntityList;
   @JsonKey(ignore: true)
@@ -1008,10 +1014,11 @@ class __$$_SortedByCategoryCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SortedByCategory implements _SortedByCategory {
+class _$_SortedByCategory extends _SortedByCategory {
   const _$_SortedByCategory(
       {required final List<ProductEntity> productEntityList})
-      : _productEntityList = productEntityList;
+      : _productEntityList = productEntityList,
+        super._();
 
   final List<ProductEntity> _productEntityList;
   @override
@@ -1128,10 +1135,11 @@ class _$_SortedByCategory implements _SortedByCategory {
   }
 }
 
-abstract class _SortedByCategory implements ReceiptState {
+abstract class _SortedByCategory extends ReceiptState {
   const factory _SortedByCategory(
           {required final List<ProductEntity> productEntityList}) =
       _$_SortedByCategory;
+  const _SortedByCategory._() : super._();
 
   List<ProductEntity> get productEntityList;
   @JsonKey(ignore: true)

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:surf_flutter_courses_template/bloc/bloc/receipt_bloc.dart';
 import 'package:surf_flutter_courses_template/data/domain/product_entity.dart';
+import 'package:surf_flutter_courses_template/ui/dialogs/sorting_receipt_dialog.dart';
 
 class ReceiptScreen extends StatelessWidget {
   const ReceiptScreen(
@@ -28,7 +29,9 @@ class ReceiptScreen extends StatelessWidget {
       body: BlocBuilder<ReceiptBloc, ReceiptState>(
         builder: (context, state) {
           return state.when(
-              loading: () => SizedBox(child:CircularProgressIndicator.adaptive() ,),
+              loading: () => SizedBox(
+                    child: CircularProgressIndicator.adaptive(),
+                  ),
               empty: () => Text("Nothing here yet"),
               loaded: (productEntityList) => _ReceiptScrollableList(
                   productEntitiesList: productEntityList),
@@ -73,7 +76,15 @@ class _ListHeader extends StatelessWidget {
       children: [
         const Text('Список покупок'),
         IconButton(
-            onPressed: () => print('Sort pressed'),
+            onPressed: () async {
+              print('Sort pressed');
+              final result = await showSortingReceiptDialog(context);
+              if(result != null) {
+                context
+                  .read<ReceiptBloc>()
+                  .add(ReceiptEvent.sort(sortingFunction: result));
+              }
+            },
             icon: const Icon(Icons.table_rows_rounded))
       ],
     );

@@ -15,8 +15,8 @@ class ReceiptBloc extends Bloc<ReceiptEvent, ReceiptState> {
     _productEntityRepository = productEntityRepository;
     on<ReceiptEvent>((event, emitter) {
       return event.map<Future<void>>(
-        load: (event) => loadProductEnteties(event,emitter),
-        sort: (event) => sortProductEnteties(event,emitter),
+        load: (event) => loadProductEnteties(event, emitter),
+        sort: (event) => sortProductEnteties(event, emitter),
       );
     });
   }
@@ -31,6 +31,12 @@ class ReceiptBloc extends Bloc<ReceiptEvent, ReceiptState> {
 
   Future<void> sortProductEnteties(
       _Sort event, Emitter<ReceiptState> emitter) async {
+    print("sortProductEnteties is called!!!!");
+    final List<ProductEntity> result = List.of(state.productEntityList ?? []);
+    if (result.isNotEmpty) {
+      result.sort(event.sortingFunction);
+      emitter(ReceiptState.sorted(productEntityList: result));
+    }
     return Future.value(1);
   }
 }
