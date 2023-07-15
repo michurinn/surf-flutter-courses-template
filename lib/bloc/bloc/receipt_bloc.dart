@@ -10,7 +10,7 @@ part 'receipt_bloc.freezed.dart';
 
 class ReceiptBloc extends Bloc<ReceiptEvent, ReceiptState> {
   late final IProductEntityRepository _productEntityRepository;
-  ReceiptBloc({required final IProductEntityRepository productEntityRepository})
+  ReceiptBloc({required IProductEntityRepository productEntityRepository})
       : super(const _Loading()) {
     _productEntityRepository = productEntityRepository;
     on<ReceiptEvent>((event, emitter) {
@@ -31,7 +31,6 @@ class ReceiptBloc extends Bloc<ReceiptEvent, ReceiptState> {
 
   Future<void> sortProductEnteties(
       _Sort event, Emitter<ReceiptState> emitter) async {
-    print("sortProductEnteties is called!!!!");
     final List<ProductEntity> result = List.of(state.productEntityList ?? []);
     if (result.isNotEmpty) {
       result.sort(event.sortingFunction);

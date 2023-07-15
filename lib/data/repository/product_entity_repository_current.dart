@@ -7,8 +7,8 @@ import 'package:surf_flutter_courses_template/data/repository/product_entity_rep
 class ProductEntityRepository implements IProductEntityRepository {
   /// Получить список доступных продуктов
   @override
-  List<ProductEntity> getProducts({required String receiptId}) {
-    return dataForStudents;
+  Future<List<ProductEntity>> getProducts({required String receiptId}) {
+    return Future.value(dataForStudents);
   }
 }
 

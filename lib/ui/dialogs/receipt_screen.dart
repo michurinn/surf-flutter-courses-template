@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:surf_flutter_courses_template/bloc/bloc/receipt_bloc.dart';
@@ -77,9 +79,9 @@ class _ListHeader extends StatelessWidget {
         const Text('Список покупок'),
         IconButton(
             onPressed: () async {
-              print('Sort pressed');
               final result = await showSortingReceiptDialog(context);
               if(result != null) {
+                // ignore: use_build_context_synchronously
                 context
                   .read<ReceiptBloc>()
                   .add(ReceiptEvent.sort(sortingFunction: result));
