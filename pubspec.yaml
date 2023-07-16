@@ -12,6 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.3
+  flutter_svg: ^2.0.7
   freezed: ^2.4.1
   freezed_annotation: ^2.4.1
   surf_lint_rules: ^3.0.0
@@ -24,3 +25,10 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - lib/assets/
+    - lib/assets/icons/
+  fonts:
+    - family: Sora
+      fonts:
+        - asset: lib/assets/fonts/mefika-font/static/Sora-Regular.ttf
