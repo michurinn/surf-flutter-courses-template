@@ -7,6 +7,7 @@ class AppTypography {
     fontSize: 18,
     fontFamily: 'Sora',
     height: 1.25,
+    color: AppColors.black,
     fontWeight: FontWeight.w700,
   );
   static const title2 = TextStyle(
@@ -14,6 +15,7 @@ class AppTypography {
     fontSize: 16,
     fontFamily: 'Sora',
     height: 1.25,
+    color: AppColors.black,
     fontWeight: FontWeight.w700,
   );
   static const subTitle = TextStyle(
@@ -21,6 +23,7 @@ class AppTypography {
     fontSize: 10,
     fontFamily: 'Sora',
     height: 1.25,
+    color: AppColors.black,
     fontWeight: FontWeight.w400,
   );
   static const textBold = TextStyle(
@@ -28,6 +31,7 @@ class AppTypography {
     fontSize: 12,
     fontFamily: 'Sora',
     height: 1.25,
+    color: AppColors.black,
     fontWeight: FontWeight.w700,
   );
   static const textNormal = TextStyle(
@@ -35,11 +39,12 @@ class AppTypography {
     fontSize: 12,
     fontFamily: 'Sora',
     height: 1.25,
+    color: AppColors.black,
     fontWeight: FontWeight.w400,
   );
   static const textLined = TextStyle(
     letterSpacing: 1,
-    fontSize: 16,
+    fontSize: 12,
     fontFamily: 'Sora',
     height: 1.25,
     decoration: TextDecoration.lineThrough,
@@ -48,7 +53,7 @@ class AppTypography {
   );
   static const textRed = TextStyle(
     letterSpacing: 1,
-    fontSize: 16,
+    fontSize: 12,
     fontFamily: 'Sora',
     height: 1.25,
     color: AppColors.red,

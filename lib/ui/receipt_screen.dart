@@ -8,7 +8,7 @@ import 'package:surf_flutter_courses_template/assets/app_typography.dart';
 import 'package:surf_flutter_courses_template/bloc/bloc/receipt_bloc.dart';
 import 'package:surf_flutter_courses_template/data/domain/product_entity.dart';
 import 'package:surf_flutter_courses_template/ui/dialogs/sorting_receipt_dialog.dart';
-import 'package:surf_flutter_courses_template/ui/dialogs/widgets/product_card.dart';
+import 'package:surf_flutter_courses_template/ui/widgets/product_card.dart';
 
 class ReceiptScreen extends StatelessWidget {
   const ReceiptScreen(
@@ -57,17 +57,17 @@ class ReceiptScreen extends StatelessWidget {
               loaded: (productEntityList) => Padding(
                 padding: const EdgeInsets.all(20),
                 child: _ReceiptScrollableList(
-                    productEntitiesList: productEntityList),
+                    isSorted: false, productEntitiesList: productEntityList),
               ),
               sorted: (productEntityList) => Padding(
                 padding: const EdgeInsets.all(20),
                 child: _ReceiptScrollableList(
-                    productEntitiesList: productEntityList),
+                    isSorted: true, productEntitiesList: productEntityList),
               ),
               sortedByCategory: (productEntityList) => Padding(
                 padding: const EdgeInsets.all(20),
                 child: _ReceiptScrollableList(
-                    productEntitiesList: productEntityList),
+                    isSorted: true, productEntitiesList: productEntityList),
               ),
             );
           },
@@ -101,28 +101,39 @@ class ReceiptScreen extends StatelessWidget {
 
 // Список товаров в чеке, с заголовком и кнопкой сортировки и Суммами в конце списка
 class _ReceiptScrollableList extends StatelessWidget {
-  const _ReceiptScrollableList({required this.productEntitiesList});
+  const _ReceiptScrollableList(
+      {required this.productEntitiesList, required this.isSorted});
   final List<ProductEntity> productEntitiesList;
+  final bool isSorted;
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
       slivers: [
-        const SliverList(
+        SliverList(
           delegate: SliverChildListDelegate.fixed([
-            _ListHeader(),
+            _ListHeader(
+              isSorted: isSorted,
+            ),
           ]),
         ),
         _ProductEntityListWidget(
           productEntitiesList: productEntitiesList,
-        )
+        ),
+        SliverList(
+          delegate: SliverChildListDelegate.fixed([
+            _ListTailWidget(
+              productEntitiesList: productEntitiesList,
+            )
+          ]),
+        ),
       ],
     );
   }
 }
 
 class _ListHeader extends StatelessWidget {
-  const _ListHeader();
-
+  const _ListHeader({required this.isSorted});
+  final bool isSorted;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -132,17 +143,19 @@ class _ListHeader extends StatelessWidget {
           'Список покупок',
           style: AppTypography.title1,
         ),
-        IconButton(
-            onPressed: () async {
-              final result = await showSortingReceiptDialog(context);
-              if (result != null) {
-                // ignore: use_build_context_synchronously
-                context
-                    .read<ReceiptBloc>()
-                    .add(ReceiptEvent.sort(sortingFunction: result));
-              }
-            },
-            icon: Container(
+        Stack(
+          children: [
+            IconButton(
+              onPressed: () async {
+                final result = await showSortingReceiptDialog(context);
+                if (result != null) {
+                  // ignore: use_build_context_synchronously
+                  context
+                      .read<ReceiptBloc>()
+                      .add(ReceiptEvent.sort(sortingFunction: result));
+                }
+              },
+              icon: Container(
                 height: 32,
                 width: 32,
                 decoration: const BoxDecoration(
@@ -156,15 +169,33 @@ class _ListHeader extends StatelessWidget {
                   height: 24,
                   width: 24,
                   fit: BoxFit.none,
-                )))
+                ),
+              ),
+            ),
+            if (isSorted)
+              Positioned(
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(12),
+                  ),
+                  child: Container(
+                    width: 8,
+                    height: 8,
+                    color: AppColors.green,
+                  ),
+                ),
+                bottom: 12,
+                right: 12,
+              ),
+          ],
+        )
       ],
     );
   }
 }
 
 class _ProductEntityListWidget extends StatelessWidget {
-  const _ProductEntityListWidget(
-      {required this.productEntitiesList});
+  const _ProductEntityListWidget({required this.productEntitiesList});
   final List<ProductEntity> productEntitiesList;
   @override
   Widget build(BuildContext context) {
@@ -184,5 +215,83 @@ class ProductEntityCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ProductCard(entity: productEntity);
+  }
+}
+
+class _ListTailWidget extends StatelessWidget {
+  const _ListTailWidget({required this.productEntitiesList});
+  final List<ProductEntity> productEntitiesList;
+
+  @override
+  Widget build(BuildContext context) {
+    // Сумма всех цен
+    final sum = productEntitiesList
+        .map((e) => e.price)
+        .reduce((value, element) => value + element)/100;
+    final sale = productEntitiesList
+        .map((e) => e.sale)
+        .reduce((value, element) => value + element);
+    final result = sum - sale;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Divider(),
+        const SizedBox(
+          height: 24,
+        ),
+        const Text(
+          'В вашей покупке',
+          style: AppTypography.title2,
+        ),
+        const SizedBox(
+          height: 20,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              '${productEntitiesList.length} товаров',
+              style: AppTypography.textNormal,
+            ),
+            Text(
+              '$sum руб',
+              style: AppTypography.textBold,
+            ),
+          ],
+        ),
+        const SizedBox(
+          height: 20,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const Text(
+              'Скидка',
+              style: AppTypography.textNormal,
+            ),
+            Text(
+              '-$sale руб',
+              style: AppTypography.textBold,
+            ),
+          ],
+        ),
+        const SizedBox(
+          height: 20,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const Text(
+              'Итого',
+              style: AppTypography.textNormal,
+            ),
+            Text(
+              '$result руб',
+              style: AppTypography.textBold,
+            ),
+          ],
+        ),
+      ],
+    );
   }
 }

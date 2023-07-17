@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:surf_flutter_courses_template/bloc/bloc/receipt_bloc.dart';
 import 'package:surf_flutter_courses_template/data/repository/product_entity_repository.dart';
 import 'package:surf_flutter_courses_template/data/repository/product_entity_repository_current.dart';
-import 'package:surf_flutter_courses_template/ui/dialogs/receipt_screen.dart';
+import 'package:surf_flutter_courses_template/ui/receipt_screen.dart';
 
 void main() {
   runApp(RepositoryProvider<IProductEntityRepository>(
