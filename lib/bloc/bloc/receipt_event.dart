@@ -2,7 +2,9 @@ part of 'receipt_bloc.dart';
 
 @freezed
 class ReceiptEvent with _$ReceiptEvent {
+  // Загрузка начального списка
   const factory ReceiptEvent.load({required String receiptId}) = _Load;
-  const factory ReceiptEvent.sort({required  SortingFunction sortingFunction }) = _Sort;
-  const factory ReceiptEvent.sortCategories({required  SortingFunction sortingFunction }) = _SortCategories;
+  // Сортировка загруженного списка
+  const factory ReceiptEvent.sort({required SortingFunction sortingFunction}) =
+      _Sort;
 }

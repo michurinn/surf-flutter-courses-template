@@ -20,11 +20,10 @@ class ReceiptBloc extends Bloc<ReceiptEvent, ReceiptState> {
       return event.map<Future<void>>(
         load: (event) => loadProductEnteties(event, emitter),
         sort: (event) => sortProductEnteties(event, emitter),
-        sortCategories: (event) => sortCategories(event, emitter),
       );
     });
   }
-
+  // Загрузка начального списка
   Future<void> loadProductEnteties(
       _Load event, Emitter<ReceiptState> emitter) async {
     final response =
@@ -44,7 +43,7 @@ class ReceiptBloc extends Bloc<ReceiptEvent, ReceiptState> {
         .toList();
     emitter(ReceiptState.loaded(productEntityList: result));
   }
-
+  // Сортировка загруженного списка
   Future<void> sortProductEnteties(
       _Sort event, Emitter<ReceiptState> emitter) async {
     final result =
@@ -73,16 +72,4 @@ class ReceiptBloc extends Bloc<ReceiptEvent, ReceiptState> {
     }
   }
 
-  Future<void> sortCategories(
-      _SortCategories event, Emitter<ReceiptState> emitter) async {
-    final result =
-        List<CategoryWithProductsModel>.of(state.productEntityList ?? []);
-    if (result.isNotEmpty) {
-      final sorted = result
-        ..sort(
-          (a, b) => a.name.name.compareTo(b.name.name),
-        );
-      emitter(ReceiptState.sorted(productEntityList: sorted));
-    }
-  }
 }

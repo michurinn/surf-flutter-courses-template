@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:surf_flutter_courses_template/assets/app_colors.dart';
 import 'package:surf_flutter_courses_template/assets/app_typography.dart';
-import 'package:surf_flutter_courses_template/data/domain/product_entity.dart';
-
-Future<Comparator<ProductEntity>?> showSortingReceiptDialog(
+import 'package:surf_flutter_courses_template/data/domain/product_in_cart.dart';
+//  Диалог выбора способа сортировки, возвращает функцию-компаратор
+Future<Comparator<ProductInCart>?> showSortingReceiptDialog(
     BuildContext context) {
-  return showModalBottomSheet<Comparator<ProductEntity>>(
+  return showModalBottomSheet<Comparator<ProductInCart>>(
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
@@ -215,7 +215,6 @@ class _SortVariant {
       : comparator = ((a, b) {
           // Поскольку сортировка по цене и названию влияет только на порядок карточек в категории, но не самих категорий
           // ТЗ п.1.6 - Порядок категорий — произвольный. Сортировка влияет на порядок товаров внутри категории.
-
           if (a.category == b.category) {
             return a.title.compareTo(b.title);
           } else {
@@ -233,7 +232,7 @@ class _SortVariant {
   _SortVariant.byPriceStraight()
       : comparator = ((a, b) {
           if (a.category == b.category) {
-            return a.price.compareTo(b.price);
+            return a.purchaseAmount.compareTo(b.purchaseAmount);
           } else {
             return 0;
           }
@@ -241,7 +240,7 @@ class _SortVariant {
   _SortVariant.byPriceRevrse()
       : comparator = ((a, b) {
           if (a.category == b.category) {
-            return b.price.compareTo(a.price);
+            return b.purchaseAmount.compareTo(a.purchaseAmount);
           } else {
             return 0;
           }
@@ -250,12 +249,12 @@ class _SortVariant {
       : comparator = ((a, b) => a.category.name.compareTo(b.category.name));
   _SortVariant.byTypeRevrse()
       : comparator = ((a, b) => b.category.name.compareTo(a.category.name));
-  final Comparator<ProductEntity>? comparator;
+  final Comparator<ProductInCart>? comparator;
 }
 
 // Кнопка Сортировать
 class _SortButtonWidget extends StatelessWidget {
-  const _SortButtonWidget({required this.onPressed, super.key});
+  const _SortButtonWidget({required this.onPressed});
   final VoidCallback onPressed;
   @override
   Widget build(BuildContext context) {

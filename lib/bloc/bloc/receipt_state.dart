@@ -8,7 +8,6 @@ class ReceiptState with _$ReceiptState {
         loaded: (productEntityList) => productEntityList,
         sorted: (productEntityList) => productEntityList,
         empty: () => null,
-        sortedByCategory: (productEntityList) => productEntityList,
       );
 
   // Состояние загрузки данных
@@ -21,7 +20,4 @@ class ReceiptState with _$ReceiptState {
   // Состояние успешной сортировки данных
   const factory ReceiptState.sorted(
       {required List<CategoryWithProductsModel> productEntityList}) = _Sorted;
-  // Состояние успешной сортировки данных по Типу
-  const factory ReceiptState.sortedByCategory(
-      {required List<CategoryWithProductsModel> productEntityList}) = _SortedByCategory;
 }

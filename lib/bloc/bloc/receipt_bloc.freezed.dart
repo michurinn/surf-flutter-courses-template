@@ -20,21 +20,18 @@ mixin _$ReceiptEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(String receiptId) load,
     required TResult Function(SortingFunction sortingFunction) sort,
-    required TResult Function(SortingFunction sortingFunction) sortCategories,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String receiptId)? load,
     TResult? Function(SortingFunction sortingFunction)? sort,
-    TResult? Function(SortingFunction sortingFunction)? sortCategories,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String receiptId)? load,
     TResult Function(SortingFunction sortingFunction)? sort,
-    TResult Function(SortingFunction sortingFunction)? sortCategories,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -42,21 +39,18 @@ mixin _$ReceiptEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Load value) load,
     required TResult Function(_Sort value) sort,
-    required TResult Function(_SortCategories value) sortCategories,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Load value)? load,
     TResult? Function(_Sort value)? sort,
-    TResult? Function(_SortCategories value)? sortCategories,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Load value)? load,
     TResult Function(_Sort value)? sort,
-    TResult Function(_SortCategories value)? sortCategories,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -145,7 +139,6 @@ class _$_Load implements _Load {
   TResult when<TResult extends Object?>({
     required TResult Function(String receiptId) load,
     required TResult Function(SortingFunction sortingFunction) sort,
-    required TResult Function(SortingFunction sortingFunction) sortCategories,
   }) {
     return load(receiptId);
   }
@@ -155,7 +148,6 @@ class _$_Load implements _Load {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String receiptId)? load,
     TResult? Function(SortingFunction sortingFunction)? sort,
-    TResult? Function(SortingFunction sortingFunction)? sortCategories,
   }) {
     return load?.call(receiptId);
   }
@@ -165,7 +157,6 @@ class _$_Load implements _Load {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String receiptId)? load,
     TResult Function(SortingFunction sortingFunction)? sort,
-    TResult Function(SortingFunction sortingFunction)? sortCategories,
     required TResult orElse(),
   }) {
     if (load != null) {
@@ -179,7 +170,6 @@ class _$_Load implements _Load {
   TResult map<TResult extends Object?>({
     required TResult Function(_Load value) load,
     required TResult Function(_Sort value) sort,
-    required TResult Function(_SortCategories value) sortCategories,
   }) {
     return load(this);
   }
@@ -189,7 +179,6 @@ class _$_Load implements _Load {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Load value)? load,
     TResult? Function(_Sort value)? sort,
-    TResult? Function(_SortCategories value)? sortCategories,
   }) {
     return load?.call(this);
   }
@@ -199,7 +188,6 @@ class _$_Load implements _Load {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Load value)? load,
     TResult Function(_Sort value)? sort,
-    TResult Function(_SortCategories value)? sortCategories,
     required TResult orElse(),
   }) {
     if (load != null) {
@@ -282,7 +270,6 @@ class _$_Sort implements _Sort {
   TResult when<TResult extends Object?>({
     required TResult Function(String receiptId) load,
     required TResult Function(SortingFunction sortingFunction) sort,
-    required TResult Function(SortingFunction sortingFunction) sortCategories,
   }) {
     return sort(sortingFunction);
   }
@@ -292,7 +279,6 @@ class _$_Sort implements _Sort {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String receiptId)? load,
     TResult? Function(SortingFunction sortingFunction)? sort,
-    TResult? Function(SortingFunction sortingFunction)? sortCategories,
   }) {
     return sort?.call(sortingFunction);
   }
@@ -302,7 +288,6 @@ class _$_Sort implements _Sort {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String receiptId)? load,
     TResult Function(SortingFunction sortingFunction)? sort,
-    TResult Function(SortingFunction sortingFunction)? sortCategories,
     required TResult orElse(),
   }) {
     if (sort != null) {
@@ -316,7 +301,6 @@ class _$_Sort implements _Sort {
   TResult map<TResult extends Object?>({
     required TResult Function(_Load value) load,
     required TResult Function(_Sort value) sort,
-    required TResult Function(_SortCategories value) sortCategories,
   }) {
     return sort(this);
   }
@@ -326,7 +310,6 @@ class _$_Sort implements _Sort {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Load value)? load,
     TResult? Function(_Sort value)? sort,
-    TResult? Function(_SortCategories value)? sortCategories,
   }) {
     return sort?.call(this);
   }
@@ -336,7 +319,6 @@ class _$_Sort implements _Sort {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Load value)? load,
     TResult Function(_Sort value)? sort,
-    TResult Function(_SortCategories value)? sortCategories,
     required TResult orElse(),
   }) {
     if (sort != null) {
@@ -356,147 +338,6 @@ abstract class _Sort implements ReceiptEvent {
 }
 
 /// @nodoc
-abstract class _$$_SortCategoriesCopyWith<$Res> {
-  factory _$$_SortCategoriesCopyWith(
-          _$_SortCategories value, $Res Function(_$_SortCategories) then) =
-      __$$_SortCategoriesCopyWithImpl<$Res>;
-  @useResult
-  $Res call({SortingFunction sortingFunction});
-}
-
-/// @nodoc
-class __$$_SortCategoriesCopyWithImpl<$Res>
-    extends _$ReceiptEventCopyWithImpl<$Res, _$_SortCategories>
-    implements _$$_SortCategoriesCopyWith<$Res> {
-  __$$_SortCategoriesCopyWithImpl(
-      _$_SortCategories _value, $Res Function(_$_SortCategories) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? sortingFunction = null,
-  }) {
-    return _then(_$_SortCategories(
-      sortingFunction: null == sortingFunction
-          ? _value.sortingFunction
-          : sortingFunction // ignore: cast_nullable_to_non_nullable
-              as SortingFunction,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$_SortCategories implements _SortCategories {
-  const _$_SortCategories({required this.sortingFunction});
-
-  @override
-  final SortingFunction sortingFunction;
-
-  @override
-  String toString() {
-    return 'ReceiptEvent.sortCategories(sortingFunction: $sortingFunction)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_SortCategories &&
-            (identical(other.sortingFunction, sortingFunction) ||
-                other.sortingFunction == sortingFunction));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, sortingFunction);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_SortCategoriesCopyWith<_$_SortCategories> get copyWith =>
-      __$$_SortCategoriesCopyWithImpl<_$_SortCategories>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String receiptId) load,
-    required TResult Function(SortingFunction sortingFunction) sort,
-    required TResult Function(SortingFunction sortingFunction) sortCategories,
-  }) {
-    return sortCategories(sortingFunction);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String receiptId)? load,
-    TResult? Function(SortingFunction sortingFunction)? sort,
-    TResult? Function(SortingFunction sortingFunction)? sortCategories,
-  }) {
-    return sortCategories?.call(sortingFunction);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String receiptId)? load,
-    TResult Function(SortingFunction sortingFunction)? sort,
-    TResult Function(SortingFunction sortingFunction)? sortCategories,
-    required TResult orElse(),
-  }) {
-    if (sortCategories != null) {
-      return sortCategories(sortingFunction);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Load value) load,
-    required TResult Function(_Sort value) sort,
-    required TResult Function(_SortCategories value) sortCategories,
-  }) {
-    return sortCategories(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Load value)? load,
-    TResult? Function(_Sort value)? sort,
-    TResult? Function(_SortCategories value)? sortCategories,
-  }) {
-    return sortCategories?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Load value)? load,
-    TResult Function(_Sort value)? sort,
-    TResult Function(_SortCategories value)? sortCategories,
-    required TResult orElse(),
-  }) {
-    if (sortCategories != null) {
-      return sortCategories(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _SortCategories implements ReceiptEvent {
-  const factory _SortCategories(
-      {required final SortingFunction sortingFunction}) = _$_SortCategories;
-
-  SortingFunction get sortingFunction;
-  @JsonKey(ignore: true)
-  _$$_SortCategoriesCopyWith<_$_SortCategories> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
 mixin _$ReceiptState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
@@ -506,8 +347,6 @@ mixin _$ReceiptState {
         loaded,
     required TResult Function(List<CategoryWithProductsModel> productEntityList)
         sorted,
-    required TResult Function(List<CategoryWithProductsModel> productEntityList)
-        sortedByCategory,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -518,8 +357,6 @@ mixin _$ReceiptState {
         loaded,
     TResult? Function(List<CategoryWithProductsModel> productEntityList)?
         sorted,
-    TResult? Function(List<CategoryWithProductsModel> productEntityList)?
-        sortedByCategory,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -528,8 +365,6 @@ mixin _$ReceiptState {
     TResult Function()? empty,
     TResult Function(List<CategoryWithProductsModel> productEntityList)? loaded,
     TResult Function(List<CategoryWithProductsModel> productEntityList)? sorted,
-    TResult Function(List<CategoryWithProductsModel> productEntityList)?
-        sortedByCategory,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -539,7 +374,6 @@ mixin _$ReceiptState {
     required TResult Function(_Empty value) empty,
     required TResult Function(_Loaded value) loaded,
     required TResult Function(_Sorted value) sorted,
-    required TResult Function(_SortedByCategory value) sortedByCategory,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -548,7 +382,6 @@ mixin _$ReceiptState {
     TResult? Function(_Empty value)? empty,
     TResult? Function(_Loaded value)? loaded,
     TResult? Function(_Sorted value)? sorted,
-    TResult? Function(_SortedByCategory value)? sortedByCategory,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -557,7 +390,6 @@ mixin _$ReceiptState {
     TResult Function(_Empty value)? empty,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_Sorted value)? sorted,
-    TResult Function(_SortedByCategory value)? sortedByCategory,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -624,8 +456,6 @@ class _$_Loading extends _Loading {
         loaded,
     required TResult Function(List<CategoryWithProductsModel> productEntityList)
         sorted,
-    required TResult Function(List<CategoryWithProductsModel> productEntityList)
-        sortedByCategory,
   }) {
     return loading();
   }
@@ -639,8 +469,6 @@ class _$_Loading extends _Loading {
         loaded,
     TResult? Function(List<CategoryWithProductsModel> productEntityList)?
         sorted,
-    TResult? Function(List<CategoryWithProductsModel> productEntityList)?
-        sortedByCategory,
   }) {
     return loading?.call();
   }
@@ -652,8 +480,6 @@ class _$_Loading extends _Loading {
     TResult Function()? empty,
     TResult Function(List<CategoryWithProductsModel> productEntityList)? loaded,
     TResult Function(List<CategoryWithProductsModel> productEntityList)? sorted,
-    TResult Function(List<CategoryWithProductsModel> productEntityList)?
-        sortedByCategory,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -669,7 +495,6 @@ class _$_Loading extends _Loading {
     required TResult Function(_Empty value) empty,
     required TResult Function(_Loaded value) loaded,
     required TResult Function(_Sorted value) sorted,
-    required TResult Function(_SortedByCategory value) sortedByCategory,
   }) {
     return loading(this);
   }
@@ -681,7 +506,6 @@ class _$_Loading extends _Loading {
     TResult? Function(_Empty value)? empty,
     TResult? Function(_Loaded value)? loaded,
     TResult? Function(_Sorted value)? sorted,
-    TResult? Function(_SortedByCategory value)? sortedByCategory,
   }) {
     return loading?.call(this);
   }
@@ -693,7 +517,6 @@ class _$_Loading extends _Loading {
     TResult Function(_Empty value)? empty,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_Sorted value)? sorted,
-    TResult Function(_SortedByCategory value)? sortedByCategory,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -750,8 +573,6 @@ class _$_Empty extends _Empty {
         loaded,
     required TResult Function(List<CategoryWithProductsModel> productEntityList)
         sorted,
-    required TResult Function(List<CategoryWithProductsModel> productEntityList)
-        sortedByCategory,
   }) {
     return empty();
   }
@@ -765,8 +586,6 @@ class _$_Empty extends _Empty {
         loaded,
     TResult? Function(List<CategoryWithProductsModel> productEntityList)?
         sorted,
-    TResult? Function(List<CategoryWithProductsModel> productEntityList)?
-        sortedByCategory,
   }) {
     return empty?.call();
   }
@@ -778,8 +597,6 @@ class _$_Empty extends _Empty {
     TResult Function()? empty,
     TResult Function(List<CategoryWithProductsModel> productEntityList)? loaded,
     TResult Function(List<CategoryWithProductsModel> productEntityList)? sorted,
-    TResult Function(List<CategoryWithProductsModel> productEntityList)?
-        sortedByCategory,
     required TResult orElse(),
   }) {
     if (empty != null) {
@@ -795,7 +612,6 @@ class _$_Empty extends _Empty {
     required TResult Function(_Empty value) empty,
     required TResult Function(_Loaded value) loaded,
     required TResult Function(_Sorted value) sorted,
-    required TResult Function(_SortedByCategory value) sortedByCategory,
   }) {
     return empty(this);
   }
@@ -807,7 +623,6 @@ class _$_Empty extends _Empty {
     TResult? Function(_Empty value)? empty,
     TResult? Function(_Loaded value)? loaded,
     TResult? Function(_Sorted value)? sorted,
-    TResult? Function(_SortedByCategory value)? sortedByCategory,
   }) {
     return empty?.call(this);
   }
@@ -819,7 +634,6 @@ class _$_Empty extends _Empty {
     TResult Function(_Empty value)? empty,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_Sorted value)? sorted,
-    TResult Function(_SortedByCategory value)? sortedByCategory,
     required TResult orElse(),
   }) {
     if (empty != null) {
@@ -913,8 +727,6 @@ class _$_Loaded extends _Loaded {
         loaded,
     required TResult Function(List<CategoryWithProductsModel> productEntityList)
         sorted,
-    required TResult Function(List<CategoryWithProductsModel> productEntityList)
-        sortedByCategory,
   }) {
     return loaded(productEntityList);
   }
@@ -928,8 +740,6 @@ class _$_Loaded extends _Loaded {
         loaded,
     TResult? Function(List<CategoryWithProductsModel> productEntityList)?
         sorted,
-    TResult? Function(List<CategoryWithProductsModel> productEntityList)?
-        sortedByCategory,
   }) {
     return loaded?.call(productEntityList);
   }
@@ -941,8 +751,6 @@ class _$_Loaded extends _Loaded {
     TResult Function()? empty,
     TResult Function(List<CategoryWithProductsModel> productEntityList)? loaded,
     TResult Function(List<CategoryWithProductsModel> productEntityList)? sorted,
-    TResult Function(List<CategoryWithProductsModel> productEntityList)?
-        sortedByCategory,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -958,7 +766,6 @@ class _$_Loaded extends _Loaded {
     required TResult Function(_Empty value) empty,
     required TResult Function(_Loaded value) loaded,
     required TResult Function(_Sorted value) sorted,
-    required TResult Function(_SortedByCategory value) sortedByCategory,
   }) {
     return loaded(this);
   }
@@ -970,7 +777,6 @@ class _$_Loaded extends _Loaded {
     TResult? Function(_Empty value)? empty,
     TResult? Function(_Loaded value)? loaded,
     TResult? Function(_Sorted value)? sorted,
-    TResult? Function(_SortedByCategory value)? sortedByCategory,
   }) {
     return loaded?.call(this);
   }
@@ -982,7 +788,6 @@ class _$_Loaded extends _Loaded {
     TResult Function(_Empty value)? empty,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_Sorted value)? sorted,
-    TResult Function(_SortedByCategory value)? sortedByCategory,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -1083,8 +888,6 @@ class _$_Sorted extends _Sorted {
         loaded,
     required TResult Function(List<CategoryWithProductsModel> productEntityList)
         sorted,
-    required TResult Function(List<CategoryWithProductsModel> productEntityList)
-        sortedByCategory,
   }) {
     return sorted(productEntityList);
   }
@@ -1098,8 +901,6 @@ class _$_Sorted extends _Sorted {
         loaded,
     TResult? Function(List<CategoryWithProductsModel> productEntityList)?
         sorted,
-    TResult? Function(List<CategoryWithProductsModel> productEntityList)?
-        sortedByCategory,
   }) {
     return sorted?.call(productEntityList);
   }
@@ -1111,8 +912,6 @@ class _$_Sorted extends _Sorted {
     TResult Function()? empty,
     TResult Function(List<CategoryWithProductsModel> productEntityList)? loaded,
     TResult Function(List<CategoryWithProductsModel> productEntityList)? sorted,
-    TResult Function(List<CategoryWithProductsModel> productEntityList)?
-        sortedByCategory,
     required TResult orElse(),
   }) {
     if (sorted != null) {
@@ -1128,7 +927,6 @@ class _$_Sorted extends _Sorted {
     required TResult Function(_Empty value) empty,
     required TResult Function(_Loaded value) loaded,
     required TResult Function(_Sorted value) sorted,
-    required TResult Function(_SortedByCategory value) sortedByCategory,
   }) {
     return sorted(this);
   }
@@ -1140,7 +938,6 @@ class _$_Sorted extends _Sorted {
     TResult? Function(_Empty value)? empty,
     TResult? Function(_Loaded value)? loaded,
     TResult? Function(_Sorted value)? sorted,
-    TResult? Function(_SortedByCategory value)? sortedByCategory,
   }) {
     return sorted?.call(this);
   }
@@ -1152,7 +949,6 @@ class _$_Sorted extends _Sorted {
     TResult Function(_Empty value)? empty,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_Sorted value)? sorted,
-    TResult Function(_SortedByCategory value)? sortedByCategory,
     required TResult orElse(),
   }) {
     if (sorted != null) {
@@ -1171,177 +967,5 @@ abstract class _Sorted extends ReceiptState {
   List<CategoryWithProductsModel> get productEntityList;
   @JsonKey(ignore: true)
   _$$_SortedCopyWith<_$_Sorted> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$_SortedByCategoryCopyWith<$Res> {
-  factory _$$_SortedByCategoryCopyWith(
-          _$_SortedByCategory value, $Res Function(_$_SortedByCategory) then) =
-      __$$_SortedByCategoryCopyWithImpl<$Res>;
-  @useResult
-  $Res call({List<CategoryWithProductsModel> productEntityList});
-}
-
-/// @nodoc
-class __$$_SortedByCategoryCopyWithImpl<$Res>
-    extends _$ReceiptStateCopyWithImpl<$Res, _$_SortedByCategory>
-    implements _$$_SortedByCategoryCopyWith<$Res> {
-  __$$_SortedByCategoryCopyWithImpl(
-      _$_SortedByCategory _value, $Res Function(_$_SortedByCategory) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? productEntityList = null,
-  }) {
-    return _then(_$_SortedByCategory(
-      productEntityList: null == productEntityList
-          ? _value._productEntityList
-          : productEntityList // ignore: cast_nullable_to_non_nullable
-              as List<CategoryWithProductsModel>,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$_SortedByCategory extends _SortedByCategory {
-  const _$_SortedByCategory(
-      {required final List<CategoryWithProductsModel> productEntityList})
-      : _productEntityList = productEntityList,
-        super._();
-
-  final List<CategoryWithProductsModel> _productEntityList;
-  @override
-  List<CategoryWithProductsModel> get productEntityList {
-    if (_productEntityList is EqualUnmodifiableListView)
-      return _productEntityList;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_productEntityList);
-  }
-
-  @override
-  String toString() {
-    return 'ReceiptState.sortedByCategory(productEntityList: $productEntityList)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_SortedByCategory &&
-            const DeepCollectionEquality()
-                .equals(other._productEntityList, _productEntityList));
-  }
-
-  @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_productEntityList));
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_SortedByCategoryCopyWith<_$_SortedByCategory> get copyWith =>
-      __$$_SortedByCategoryCopyWithImpl<_$_SortedByCategory>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loading,
-    required TResult Function() empty,
-    required TResult Function(List<CategoryWithProductsModel> productEntityList)
-        loaded,
-    required TResult Function(List<CategoryWithProductsModel> productEntityList)
-        sorted,
-    required TResult Function(List<CategoryWithProductsModel> productEntityList)
-        sortedByCategory,
-  }) {
-    return sortedByCategory(productEntityList);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loading,
-    TResult? Function()? empty,
-    TResult? Function(List<CategoryWithProductsModel> productEntityList)?
-        loaded,
-    TResult? Function(List<CategoryWithProductsModel> productEntityList)?
-        sorted,
-    TResult? Function(List<CategoryWithProductsModel> productEntityList)?
-        sortedByCategory,
-  }) {
-    return sortedByCategory?.call(productEntityList);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function()? empty,
-    TResult Function(List<CategoryWithProductsModel> productEntityList)? loaded,
-    TResult Function(List<CategoryWithProductsModel> productEntityList)? sorted,
-    TResult Function(List<CategoryWithProductsModel> productEntityList)?
-        sortedByCategory,
-    required TResult orElse(),
-  }) {
-    if (sortedByCategory != null) {
-      return sortedByCategory(productEntityList);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Empty value) empty,
-    required TResult Function(_Loaded value) loaded,
-    required TResult Function(_Sorted value) sorted,
-    required TResult Function(_SortedByCategory value) sortedByCategory,
-  }) {
-    return sortedByCategory(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Empty value)? empty,
-    TResult? Function(_Loaded value)? loaded,
-    TResult? Function(_Sorted value)? sorted,
-    TResult? Function(_SortedByCategory value)? sortedByCategory,
-  }) {
-    return sortedByCategory?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Empty value)? empty,
-    TResult Function(_Loaded value)? loaded,
-    TResult Function(_Sorted value)? sorted,
-    TResult Function(_SortedByCategory value)? sortedByCategory,
-    required TResult orElse(),
-  }) {
-    if (sortedByCategory != null) {
-      return sortedByCategory(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _SortedByCategory extends ReceiptState {
-  const factory _SortedByCategory(
-          {required final List<CategoryWithProductsModel> productEntityList}) =
-      _$_SortedByCategory;
-  const _SortedByCategory._() : super._();
-
-  List<CategoryWithProductsModel> get productEntityList;
-  @JsonKey(ignore: true)
-  _$$_SortedByCategoryCopyWith<_$_SortedByCategory> get copyWith =>
       throw _privateConstructorUsedError;
 }
