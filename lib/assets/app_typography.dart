@@ -26,7 +26,7 @@ class AppTypography {
     color: AppColors.black,
     fontWeight: FontWeight.w400,
   );
-  static const textBold = TextStyle(
+  static const  textBold = TextStyle(
     letterSpacing: 1,
     fontSize: 12,
     fontFamily: 'Sora',

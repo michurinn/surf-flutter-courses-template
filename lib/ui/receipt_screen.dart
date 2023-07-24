@@ -6,7 +6,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:surf_flutter_courses_template/assets/app_colors.dart';
 import 'package:surf_flutter_courses_template/assets/app_typography.dart';
 import 'package:surf_flutter_courses_template/bloc/bloc/receipt_bloc.dart';
-import 'package:surf_flutter_courses_template/data/domain/product_entity.dart';
+import 'package:surf_flutter_courses_template/data/domain/category_with_products_model.dart';
+import 'package:surf_flutter_courses_template/data/domain/product_in_cart.dart';
 import 'package:surf_flutter_courses_template/ui/dialogs/sorting_receipt_dialog.dart';
 import 'package:surf_flutter_courses_template/ui/widgets/product_card.dart';
 
@@ -15,7 +16,7 @@ class ReceiptScreen extends StatelessWidget {
       {required this.receiptId, required this.receiptDate, super.key});
   final String receiptId;
   final String receiptDate;
-
+  
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -103,10 +104,14 @@ class ReceiptScreen extends StatelessWidget {
 class _ReceiptScrollableList extends StatelessWidget {
   const _ReceiptScrollableList(
       {required this.productEntitiesList, required this.isSorted});
-  final List<ProductEntity> productEntitiesList;
+  final List<CategoryWithProductsModel> productEntitiesList;
   final bool isSorted;
   @override
   Widget build(BuildContext context) {
+    final summuryList =
+        List<CategoryWithProductsModel>.from(productEntitiesList)
+            .expand((e) => e.products)
+            .toList();
     return CustomScrollView(
       slivers: [
         SliverList(
@@ -116,15 +121,16 @@ class _ReceiptScrollableList extends StatelessWidget {
             ),
           ]),
         ),
-        _ProductEntityListWidget(
-          productEntitiesList: productEntitiesList,
+        SliverList(
+          delegate: SliverChildListDelegate([
+            _ProductEntityListWidget(
+              productEntitiesList: productEntitiesList,
+            ),
+          ]),
         ),
         SliverList(
-          delegate: SliverChildListDelegate.fixed([
-            _ListTailWidget(
-              productEntitiesList: productEntitiesList,
-            )
-          ]),
+          delegate: SliverChildListDelegate.fixed(
+              [_ListTailWidget(productEntitiesList: summuryList)]),
         ),
       ],
     );
@@ -196,41 +202,61 @@ class _ListHeader extends StatelessWidget {
 
 class _ProductEntityListWidget extends StatelessWidget {
   const _ProductEntityListWidget({required this.productEntitiesList});
-  final List<ProductEntity> productEntitiesList;
+  final List<CategoryWithProductsModel> productEntitiesList;
+
   @override
   Widget build(BuildContext context) {
-    return SliverList(
-      delegate: SliverChildBuilderDelegate(
-        (context, index) =>
-            ProductEntityCardWidget(productEntity: productEntitiesList[index]),
-        childCount: productEntitiesList.length,
-      ),
+    return Column(
+      children: productEntitiesList
+          .map((e) => ProducCategoryWidget(
+                productEntity: e,
+              ))
+          .toList(),
     );
   }
 }
 
-class ProductEntityCardWidget extends StatelessWidget {
-  const ProductEntityCardWidget({required this.productEntity, super.key});
-  final ProductEntity productEntity;
+class ProducCategoryWidget extends StatelessWidget {
+  const ProducCategoryWidget({required this.productEntity, super.key});
+  final CategoryWithProductsModel productEntity;
+
   @override
   Widget build(BuildContext context) {
-    return ProductCard(entity: productEntity);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 20),
+          child: Text(
+            productEntity.name.name,
+            style: AppTypography.title2,
+          ),
+        ),
+        ...productEntity.products.expand((element) => [
+              ProductCard(
+                entity: element,
+              )
+            ])
+      ],
+    );
   }
 }
 
 class _ListTailWidget extends StatelessWidget {
   const _ListTailWidget({required this.productEntitiesList});
-  final List<ProductEntity> productEntitiesList;
+  final List<ProductInCart> productEntitiesList;
 
   @override
   Widget build(BuildContext context) {
     // Сумма всех цен
     final sum = productEntitiesList
-        .map((e) => e.price)
-        .reduce((value, element) => value + element)/100;
+            .map((e) => e.purchaseAmount)
+            .reduce((value, element) => value + element) /
+        100;
     final sale = productEntitiesList
-        .map((e) => e.sale)
-        .reduce((value, element) => value + element);
+            .map((e) => e.sale)
+            .reduce((value, element) => value + element) /
+        100;
     final result = sum - sale;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -283,11 +309,11 @@ class _ListTailWidget extends StatelessWidget {
           children: [
             const Text(
               'Итого',
-              style: AppTypography.textNormal,
+              style: AppTypography.title2,
             ),
             Text(
               '$result руб',
-              style: AppTypography.textBold,
+              style: AppTypography.title2,
             ),
           ],
         ),

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:surf_flutter_courses_template/assets/app_colors.dart';
+import 'package:surf_flutter_courses_template/assets/app_typography.dart';
 import 'package:surf_flutter_courses_template/data/domain/product_entity.dart';
 
 Future<Comparator<ProductEntity>?> showSortingReceiptDialog(
@@ -28,130 +30,180 @@ class _SortRadioButtonsListWidget extends StatefulWidget {
 
 class __SortRadioButtonsListWidgetState
     extends State<_SortRadioButtonsListWidget> {
-  late _SortVariant _character = _SortVariant.none();
+  late _SortVariant _character;
+  late List<_SortVariant> sortVariantsList;
+  @override
+  void initState() {
+    super.initState();
+    sortVariantsList = [
+      _SortVariant.none(),
+      _SortVariant.byNameStraight(),
+      _SortVariant.byNameRevrse(),
+      _SortVariant.byPriceStraight(),
+      _SortVariant.byPriceRevrse(),
+      _SortVariant.byTypeStraight(),
+      _SortVariant.byTypeRevrse()
+    ];
+    // По умолчанию отмечкено поле Без сортировки
+    _character = sortVariantsList[0];
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          children: [
-            const Text('Список покупок'),
-            IconButton(
-                onPressed: () => Navigator.of(context).pop(null),
-                icon: const Icon(Icons.close))
-          ],
-        ),
-        ListTile(
-          title: const Text('Без сортировки'),
-          leading: Radio<_SortVariant>(
-            value: _SortVariant.none(),
-            groupValue: _character,
-            onChanged: (value) {
-              if (value != null) {
-                setState(() {
-                  _character = value;
-                });
-              }
-            },
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text(
+                'Сортировка',
+                style: AppTypography.title1,
+              ),
+              IconButton(
+                  onPressed: () => Navigator.of(context).pop(null),
+                  icon: const Icon(Icons.close))
+            ],
           ),
-        ),
-        const Divider(),
-        const Text('По имени'),
-        ListTile(
-          title: const Text('По имени от А до Я'),
-          leading: Radio<_SortVariant>(
-            value: _SortVariant.byNameStraight(),
-            groupValue: _character,
-            onChanged: (value) {
-              if (value != null) {
-                setState(() {
-                  _character = value;
-                });
-              }
-            },
+          ListTile(
+            contentPadding: EdgeInsets.zero,
+            title: const Text('Без сортировки'),
+            leading: Radio<_SortVariant>(
+              activeColor: AppColors.green,
+              value: sortVariantsList[0],
+              groupValue: _character,
+              onChanged: (value) {
+                if (value != null) {
+                  setState(() {
+                    _character = value;
+                  });
+                }
+              },
+            ),
           ),
-        ),
-        ListTile(
-          title: const Text('По имени от Я до А'),
-          leading: Radio<_SortVariant>(
-            value: _SortVariant.byNameRevrse(),
-            groupValue: _character,
-            onChanged: (value) {
-              if (value != null) {
-                setState(() {
-                  _character = value;
-                });
-              }
-            },
+          const Divider(),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 15),
+            child: Text('По имени'),
           ),
-        ),
-        const Divider(),
-        const Text('По цене'),
-        ListTile(
-          title: const Text('По возрастанию'),
-          leading: Radio<_SortVariant>(
-            value: _SortVariant.byPriceStraight(),
-            groupValue: _character,
-            onChanged: (value) {
-              if (value != null) {
-                setState(() {
-                  _character = value;
-                });
-              }
-            },
+          ListTile(
+            contentPadding: EdgeInsets.zero,
+            title: const Text('По имени от А до Я'),
+            leading: Radio<_SortVariant>(
+              activeColor: AppColors.green,
+              value: sortVariantsList[1],
+              groupValue: _character,
+              onChanged: (value) {
+                if (value != null) {
+                  setState(() {
+                    _character = value;
+                  });
+                }
+              },
+            ),
           ),
-        ),
-        ListTile(
-          title: const Text('По убыванию'),
-          leading: Radio<_SortVariant>(
-            value: _SortVariant.byPriceRevrse(),
-            groupValue: _character,
-            onChanged: (value) {
-              if (value != null) {
-                setState(() {
-                  _character = value;
-                });
-              }
-            },
+          ListTile(
+            contentPadding: EdgeInsets.zero,
+            title: const Text('По имени от Я до А'),
+            leading: Radio<_SortVariant>(
+              activeColor: AppColors.green,
+              value: sortVariantsList[2],
+              groupValue: _character,
+              onChanged: (value) {
+                if (value != null) {
+                  setState(() {
+                    _character = value;
+                  });
+                }
+              },
+            ),
           ),
-        ),
-        const Divider(),
-        const Text('По типу'),
-        ListTile(
-          title: const Text('По типу от А до Я'),
-          leading: Radio<_SortVariant>(
-            value: _SortVariant.byTypeStraight(),
-            groupValue: _character,
-            onChanged: (value) {
-              if (value != null) {
-                setState(() {
-                  _character = value;
-                });
-              }
-            },
+          const Divider(),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 15),
+            child: Text('По цене'),
           ),
-        ),
-        ListTile(
-          title: const Text('По типу от Я до А'),
-          leading: Radio<_SortVariant>(
-            value: _SortVariant.byTypeRevrse(),
-            groupValue: _character,
-            onChanged: (value) {
-              if (value != null) {
-                setState(() {
-                  _character = value;
-                });
-              }
-            },
+          ListTile(
+            contentPadding: EdgeInsets.zero,
+            title: const Text('По возрастанию'),
+            leading: Radio<_SortVariant>(
+              activeColor: AppColors.green,
+              value: sortVariantsList[3],
+              groupValue: _character,
+              onChanged: (value) {
+                if (value != null) {
+                  setState(() {
+                    _character = value;
+                  });
+                }
+              },
+            ),
           ),
-        ),
-        OutlinedButton(
-          onPressed: () {
-            Navigator.of(context).pop(_character.comparator);
-          },
-          child: const Text('GO!'),
-        )
-      ],
+          ListTile(
+            contentPadding: EdgeInsets.zero,
+            title: const Text('По убыванию'),
+            leading: Radio<_SortVariant>(
+              activeColor: AppColors.green,
+              value: sortVariantsList[4],
+              groupValue: _character,
+              onChanged: (value) {
+                if (value != null) {
+                  setState(() {
+                    _character = value;
+                  });
+                }
+              },
+            ),
+          ),
+          const Divider(),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 15),
+            child: Text('По типу'),
+          ),
+          ListTile(
+            contentPadding: EdgeInsets.zero,
+            title: const Text('По типу от А до Я'),
+            leading: Radio<_SortVariant>(
+              activeColor: AppColors.green,
+              value: sortVariantsList[5],
+              groupValue: _character,
+              onChanged: (value) {
+                if (value != null) {
+                  setState(() {
+                    _character = value;
+                  });
+                }
+              },
+            ),
+          ),
+          ListTile(
+            contentPadding: EdgeInsets.zero,
+            title: const Text('По типу от Я до А'),
+            leading: Radio<_SortVariant>(
+              activeColor: AppColors.green,
+              value: sortVariantsList[6],
+              groupValue: _character,
+              onChanged: (value) {
+                if (value != null) {
+                  setState(() {
+                    _character = value;
+                  });
+                }
+              },
+            ),
+          ),
+          const SizedBox(
+            height: 40,
+          ),
+          _SortButtonWidget(
+            onPressed: () {
+              Navigator.of(context).pop(_character.comparator);
+            },
+          )
+        ],
+      ),
     );
   }
 }
@@ -160,16 +212,69 @@ class __SortRadioButtonsListWidgetState
 class _SortVariant {
   _SortVariant.none() : comparator = null;
   _SortVariant.byNameStraight()
-      : comparator = ((a, b) => a.title.compareTo(b.title));
+      : comparator = ((a, b) {
+          // Поскольку сортировка по цене и названию влияет только на порядок карточек в категории, но не самих категорий
+          // ТЗ п.1.6 - Порядок категорий — произвольный. Сортировка влияет на порядок товаров внутри категории.
+
+          if (a.category == b.category) {
+            return a.title.compareTo(b.title);
+          } else {
+            return 0;
+          }
+        });
   _SortVariant.byNameRevrse()
-      : comparator = ((a, b) => b.title.compareTo(a.title));
+      : comparator = ((a, b) {
+          if (a.category == b.category) {
+            return b.title.compareTo(a.title);
+          } else {
+            return 0;
+          }
+        });
   _SortVariant.byPriceStraight()
-      : comparator = ((a, b) => a.price.compareTo(b.price));
+      : comparator = ((a, b) {
+          if (a.category == b.category) {
+            return a.price.compareTo(b.price);
+          } else {
+            return 0;
+          }
+        });
   _SortVariant.byPriceRevrse()
-      : comparator = ((a, b) => b.price.compareTo(a.price));
+      : comparator = ((a, b) {
+          if (a.category == b.category) {
+            return b.price.compareTo(a.price);
+          } else {
+            return 0;
+          }
+        });
   _SortVariant.byTypeStraight()
       : comparator = ((a, b) => a.category.name.compareTo(b.category.name));
   _SortVariant.byTypeRevrse()
       : comparator = ((a, b) => b.category.name.compareTo(a.category.name));
   final Comparator<ProductEntity>? comparator;
+}
+
+// Кнопка Сортировать
+class _SortButtonWidget extends StatelessWidget {
+  const _SortButtonWidget({required this.onPressed, super.key});
+  final VoidCallback onPressed;
+  @override
+  Widget build(BuildContext context) {
+    return OutlinedButton(
+        onPressed: onPressed,
+        child: Text(
+          'Готово',
+          style: AppTypography.title2.copyWith(color: Colors.white),
+        ),
+        style: OutlinedButton.styleFrom(
+          side: const BorderSide(width: 0, color: Colors.transparent),
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(12),
+            ),
+          ),
+          minimumSize: const Size(328, 48),
+          backgroundColor: AppColors.green,
+          textStyle: AppTypography.title2.copyWith(color: Colors.white),
+        ));
+  }
 }

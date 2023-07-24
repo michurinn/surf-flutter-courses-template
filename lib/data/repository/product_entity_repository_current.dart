@@ -23,7 +23,7 @@ final dataForStudents = <ProductEntity>[
     category: Category.food,
     imageUrl:
         'https://images.unsplash.com/photo-1589984662646-e7b2e4962f18?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80',
-    amount: Grams(1000),
+    amount: Grams(1500),
     sale: 50,
   ),
   ProductEntity(
@@ -85,7 +85,7 @@ final dataForStudents = <ProductEntity>[
   ProductEntity(
     title: 'Аспирин',
     price: 15,
-    amount: Quantity(1),
+    amount: Quantity(10),
     category: Category.drugs,
     imageUrl:
         'https://images.unsplash.com/photo-1626716493137-b67fe9501e76?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YXNwaXJpbnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60',

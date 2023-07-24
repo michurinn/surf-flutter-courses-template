@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:surf_flutter_courses_template/assets/app_typography.dart';
 import 'package:surf_flutter_courses_template/data/domain/amount.dart';
-import 'package:surf_flutter_courses_template/data/domain/product_entity.dart';
+import 'package:surf_flutter_courses_template/data/domain/product_in_cart.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({required this.entity, super.key});
-  final ProductEntity entity;
+  final ProductInCart entity;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -77,27 +77,27 @@ class ProductCard extends StatelessWidget {
 
 class _EntityPriceWidget extends StatelessWidget {
   const _EntityPriceWidget({required this.entity});
-  final ProductEntity entity;
+  final ProductInCart entity;
   @override
   Widget build(BuildContext context) {
     switch (entity.sale) {
       case 0.0:
         return Text(
-          '${entity.price/100} руб',
+          '${entity.purchaseAmount / 100} руб',
           style: AppTypography.textBold,
         );
       default:
         return Row(
           children: [
             Text(
-              '${entity.price/100} руб',
+              '${entity.oldPurchaseAmount / 100} руб',
               style: AppTypography.textLined,
             ),
             const SizedBox(
               width: 15,
             ),
             Text(
-              '${(entity.price - entity.sale)/100} руб',
+              '${entity.purchaseAmount / 100} руб',
               style: AppTypography.textRed,
             ),
           ],

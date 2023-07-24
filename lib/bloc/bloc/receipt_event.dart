@@ -4,4 +4,5 @@ part of 'receipt_bloc.dart';
 class ReceiptEvent with _$ReceiptEvent {
   const factory ReceiptEvent.load({required String receiptId}) = _Load;
   const factory ReceiptEvent.sort({required  SortingFunction sortingFunction }) = _Sort;
+  const factory ReceiptEvent.sortCategories({required  SortingFunction sortingFunction }) = _SortCategories;
 }
