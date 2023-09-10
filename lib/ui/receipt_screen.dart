@@ -126,7 +126,7 @@ class _ReceiptScrollableList extends StatelessWidget {
       slivers: [
         SliverPersistentHeader(
           pinned: true,
-          delegate: _ListHeader(isSorted: isSorted),
+          delegate: _ListHeader(isSorted: isSorted,products: summuryList),
         ),
         SliverList(
           delegate: SliverChildListDelegate([
@@ -145,8 +145,9 @@ class _ReceiptScrollableList extends StatelessWidget {
 }
 // Заголовок с кнопкой Сортировать
 class _ListHeader extends SliverPersistentHeaderDelegate {
-  const _ListHeader({required this.isSorted});
+  const _ListHeader({required this.isSorted, required this.products});
   final bool isSorted;
+  final List<ProductInCart> products;
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
@@ -164,12 +165,12 @@ class _ListHeader extends SliverPersistentHeaderDelegate {
               children: [
                 IconButton(
                   onPressed: () async {
-                    final result = await showSortingReceiptDialog(context);
+                    final result = await showSortingReceiptDialog(context,products);
                     if (result != null) {
                       // ignore: use_build_context_synchronously
                       context
                           .read<ReceiptBloc>()
-                          .add(ReceiptEvent.sort(sortingFunction: result));
+                          .add(ReceiptEvent.sort(sortedList: result));
                     } else {
                       // ignore: use_build_context_synchronously
                       context

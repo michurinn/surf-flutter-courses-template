@@ -19,19 +19,19 @@ mixin _$ReceiptEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String receiptId) load,
-    required TResult Function(SortingFunction sortingFunction) sort,
+    required TResult Function(List<ProductInCart> sortedList) sort,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String receiptId)? load,
-    TResult? Function(SortingFunction sortingFunction)? sort,
+    TResult? Function(List<ProductInCart> sortedList)? sort,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String receiptId)? load,
-    TResult Function(SortingFunction sortingFunction)? sort,
+    TResult Function(List<ProductInCart> sortedList)? sort,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -138,7 +138,7 @@ class _$_Load implements _Load {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String receiptId) load,
-    required TResult Function(SortingFunction sortingFunction) sort,
+    required TResult Function(List<ProductInCart> sortedList) sort,
   }) {
     return load(receiptId);
   }
@@ -147,7 +147,7 @@ class _$_Load implements _Load {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String receiptId)? load,
-    TResult? Function(SortingFunction sortingFunction)? sort,
+    TResult? Function(List<ProductInCart> sortedList)? sort,
   }) {
     return load?.call(receiptId);
   }
@@ -156,7 +156,7 @@ class _$_Load implements _Load {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String receiptId)? load,
-    TResult Function(SortingFunction sortingFunction)? sort,
+    TResult Function(List<ProductInCart> sortedList)? sort,
     required TResult orElse(),
   }) {
     if (load != null) {
@@ -210,7 +210,7 @@ abstract class _$$_SortCopyWith<$Res> {
   factory _$$_SortCopyWith(_$_Sort value, $Res Function(_$_Sort) then) =
       __$$_SortCopyWithImpl<$Res>;
   @useResult
-  $Res call({SortingFunction sortingFunction});
+  $Res call({List<ProductInCart> sortedList});
 }
 
 /// @nodoc
@@ -223,13 +223,13 @@ class __$$_SortCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? sortingFunction = null,
+    Object? sortedList = null,
   }) {
     return _then(_$_Sort(
-      sortingFunction: null == sortingFunction
-          ? _value.sortingFunction
-          : sortingFunction // ignore: cast_nullable_to_non_nullable
-              as SortingFunction,
+      sortedList: null == sortedList
+          ? _value._sortedList
+          : sortedList // ignore: cast_nullable_to_non_nullable
+              as List<ProductInCart>,
     ));
   }
 }
@@ -237,14 +237,20 @@ class __$$_SortCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Sort implements _Sort {
-  const _$_Sort({required this.sortingFunction});
+  const _$_Sort({required final List<ProductInCart> sortedList})
+      : _sortedList = sortedList;
 
+  final List<ProductInCart> _sortedList;
   @override
-  final SortingFunction sortingFunction;
+  List<ProductInCart> get sortedList {
+    if (_sortedList is EqualUnmodifiableListView) return _sortedList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_sortedList);
+  }
 
   @override
   String toString() {
-    return 'ReceiptEvent.sort(sortingFunction: $sortingFunction)';
+    return 'ReceiptEvent.sort(sortedList: $sortedList)';
   }
 
   @override
@@ -252,12 +258,13 @@ class _$_Sort implements _Sort {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Sort &&
-            (identical(other.sortingFunction, sortingFunction) ||
-                other.sortingFunction == sortingFunction));
+            const DeepCollectionEquality()
+                .equals(other._sortedList, _sortedList));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, sortingFunction);
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_sortedList));
 
   @JsonKey(ignore: true)
   @override
@@ -269,29 +276,29 @@ class _$_Sort implements _Sort {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String receiptId) load,
-    required TResult Function(SortingFunction sortingFunction) sort,
+    required TResult Function(List<ProductInCart> sortedList) sort,
   }) {
-    return sort(sortingFunction);
+    return sort(sortedList);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String receiptId)? load,
-    TResult? Function(SortingFunction sortingFunction)? sort,
+    TResult? Function(List<ProductInCart> sortedList)? sort,
   }) {
-    return sort?.call(sortingFunction);
+    return sort?.call(sortedList);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String receiptId)? load,
-    TResult Function(SortingFunction sortingFunction)? sort,
+    TResult Function(List<ProductInCart> sortedList)? sort,
     required TResult orElse(),
   }) {
     if (sort != null) {
-      return sort(sortingFunction);
+      return sort(sortedList);
     }
     return orElse();
   }
@@ -329,10 +336,10 @@ class _$_Sort implements _Sort {
 }
 
 abstract class _Sort implements ReceiptEvent {
-  const factory _Sort({required final SortingFunction sortingFunction}) =
+  const factory _Sort({required final List<ProductInCart> sortedList}) =
       _$_Sort;
 
-  SortingFunction get sortingFunction;
+  List<ProductInCart> get sortedList;
   @JsonKey(ignore: true)
   _$$_SortCopyWith<_$_Sort> get copyWith => throw _privateConstructorUsedError;
 }

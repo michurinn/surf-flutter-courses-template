@@ -4,7 +4,6 @@ import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:surf_flutter_courses_template/data/domain/category_with_products_model.dart';
 import 'package:surf_flutter_courses_template/data/domain/product_in_cart.dart';
-import 'package:surf_flutter_courses_template/data/domain/typedefs.dart';
 import 'package:surf_flutter_courses_template/data/repository/product_entity_repository.dart';
 
 part 'receipt_event.dart';
@@ -12,10 +11,9 @@ part 'receipt_state.dart';
 part 'receipt_bloc.freezed.dart';
 
 class ReceiptBloc extends Bloc<ReceiptEvent, ReceiptState> {
-  late final IProductEntityRepository _productEntityRepository;
-  ReceiptBloc({required IProductEntityRepository productEntityRepository})
+  final IProductEntityRepository productEntityRepository;
+  ReceiptBloc({required this.productEntityRepository})
       : super(const _Loading()) {
-    _productEntityRepository = productEntityRepository;
     on<ReceiptEvent>((event, emitter) {
       return event.map<Future<void>>(
         load: (event) => loadProductEnteties(event, emitter),
@@ -27,7 +25,7 @@ class ReceiptBloc extends Bloc<ReceiptEvent, ReceiptState> {
   Future<void> loadProductEnteties(
       _Load event, Emitter<ReceiptState> emitter) async {
     final response =
-        await _productEntityRepository.getProducts(receiptId: event.receiptId);
+        await productEntityRepository.getProducts(receiptId: event.receiptId);
     final products = response.map(ProductInCart.fromProductEntity).toList();
     final categories = products.map((e) => e.category).toSet().toList();
     final result = categories
@@ -43,18 +41,14 @@ class ReceiptBloc extends Bloc<ReceiptEvent, ReceiptState> {
         .toList();
     emitter(ReceiptState.loaded(productEntityList: result));
   }
+
   // Сортировка загруженного списка
   Future<void> sortProductEnteties(
       _Sort event, Emitter<ReceiptState> emitter) async {
     final result =
         List<CategoryWithProductsModel>.of(state.productEntityList ?? []);
     if (result.isNotEmpty) {
-      final products = result
-          .expand(
-            (element) => element.products,
-          )
-          .toList()
-        ..sort(event.sortingFunction);
+      final products = event.sortedList;
 
       final categories = products.map((e) => e.category).toSet().toList();
       final sorted = categories
@@ -71,5 +65,4 @@ class ReceiptBloc extends Bloc<ReceiptEvent, ReceiptState> {
       emitter(ReceiptState.sorted(productEntityList: sorted));
     }
   }
-
 }

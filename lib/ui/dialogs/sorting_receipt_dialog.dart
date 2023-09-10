@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:surf_flutter_courses_template/assets/app_colors.dart';
 import 'package:surf_flutter_courses_template/assets/app_typography.dart';
 import 'package:surf_flutter_courses_template/data/domain/product_in_cart.dart';
+import 'package:surf_flutter_courses_template/data/domain/products_sorting_decorator.dart';
+
 //  Диалог выбора способа сортировки, возвращает функцию-компаратор
-Future<Comparator<ProductInCart>?> showSortingReceiptDialog(
-    BuildContext context) {
-  return showModalBottomSheet<Comparator<ProductInCart>>(
+Future<List<ProductInCart>?> showSortingReceiptDialog(
+    BuildContext context, List<ProductInCart> products) {
+  return showModalBottomSheet<List<ProductInCart>?>(
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
@@ -14,15 +16,15 @@ Future<Comparator<ProductInCart>?> showSortingReceiptDialog(
           initialChildSize: 0.8,
           expand: false,
           builder: (context, scrollController) =>
-              const _SortRadioButtonsListWidget(),
+              _SortRadioButtonsListWidget(products),
         );
       },
       context: context);
 }
 
 class _SortRadioButtonsListWidget extends StatefulWidget {
-  const _SortRadioButtonsListWidget();
-
+  const _SortRadioButtonsListWidget(this.products);
+  final List<ProductInCart> products;
   @override
   State<_SortRadioButtonsListWidget> createState() =>
       __SortRadioButtonsListWidgetState();
@@ -30,22 +32,15 @@ class _SortRadioButtonsListWidget extends StatefulWidget {
 
 class __SortRadioButtonsListWidgetState
     extends State<_SortRadioButtonsListWidget> {
-  late _SortVariant _character;
-  late List<_SortVariant> sortVariantsList;
+  late int _character;
+  late SortingInterfaceDecorator decorator;
+  late ProductsWithoutSorting componentProducts;
   @override
   void initState() {
     super.initState();
-    sortVariantsList = [
-      _SortVariant.none(),
-      _SortVariant.byNameStraight(),
-      _SortVariant.byNameRevrse(),
-      _SortVariant.byPriceStraight(),
-      _SortVariant.byPriceRevrse(),
-      _SortVariant.byTypeStraight(),
-      _SortVariant.byTypeRevrse()
-    ];
-    // По умолчанию отмечкено поле Без сортировки
-    _character = sortVariantsList[0];
+    componentProducts = ProductsWithoutSorting(widget.products);
+    decorator = NoDecorator(componentProducts);
+    _character = 0;
   }
 
   @override
@@ -70,11 +65,12 @@ class __SortRadioButtonsListWidgetState
           ListTile(
             contentPadding: EdgeInsets.zero,
             title: const Text('Без сортировки'),
-            leading: Radio<_SortVariant>(
+            leading: Radio<int>(
               activeColor: AppColors.green,
-              value: sortVariantsList[0],
+              value: 0,
               groupValue: _character,
               onChanged: (value) {
+                decorator = NoDecorator(componentProducts);
                 if (value != null) {
                   setState(() {
                     _character = value;
@@ -91,11 +87,12 @@ class __SortRadioButtonsListWidgetState
           ListTile(
             contentPadding: EdgeInsets.zero,
             title: const Text('По имени от А до Я'),
-            leading: Radio<_SortVariant>(
+            leading: Radio<int>(
               activeColor: AppColors.green,
-              value: sortVariantsList[1],
+              value: 1,
               groupValue: _character,
               onChanged: (value) {
+                decorator = NameStraightDecorator(componentProducts);
                 if (value != null) {
                   setState(() {
                     _character = value;
@@ -107,11 +104,12 @@ class __SortRadioButtonsListWidgetState
           ListTile(
             contentPadding: EdgeInsets.zero,
             title: const Text('По имени от Я до А'),
-            leading: Radio<_SortVariant>(
+            leading: Radio<int>(
               activeColor: AppColors.green,
-              value: sortVariantsList[2],
+              value: 2,
               groupValue: _character,
               onChanged: (value) {
+                decorator = NameReverseDecorator(componentProducts);
                 if (value != null) {
                   setState(() {
                     _character = value;
@@ -128,11 +126,12 @@ class __SortRadioButtonsListWidgetState
           ListTile(
             contentPadding: EdgeInsets.zero,
             title: const Text('По возрастанию'),
-            leading: Radio<_SortVariant>(
+            leading: Radio<int>(
               activeColor: AppColors.green,
-              value: sortVariantsList[3],
+              value: 3,
               groupValue: _character,
               onChanged: (value) {
+                decorator = PriceStraightDecorator(componentProducts);
                 if (value != null) {
                   setState(() {
                     _character = value;
@@ -144,11 +143,12 @@ class __SortRadioButtonsListWidgetState
           ListTile(
             contentPadding: EdgeInsets.zero,
             title: const Text('По убыванию'),
-            leading: Radio<_SortVariant>(
+            leading: Radio<int>(
               activeColor: AppColors.green,
-              value: sortVariantsList[4],
+              value: 4,
               groupValue: _character,
               onChanged: (value) {
+                decorator = PriceReverseDecorator(componentProducts);
                 if (value != null) {
                   setState(() {
                     _character = value;
@@ -165,11 +165,12 @@ class __SortRadioButtonsListWidgetState
           ListTile(
             contentPadding: EdgeInsets.zero,
             title: const Text('По типу от А до Я'),
-            leading: Radio<_SortVariant>(
+            leading: Radio<int>(
               activeColor: AppColors.green,
-              value: sortVariantsList[5],
+              value: 5,
               groupValue: _character,
               onChanged: (value) {
+                decorator = CategoryStraightDecorator(componentProducts);
                 if (value != null) {
                   setState(() {
                     _character = value;
@@ -181,11 +182,12 @@ class __SortRadioButtonsListWidgetState
           ListTile(
             contentPadding: EdgeInsets.zero,
             title: const Text('По типу от Я до А'),
-            leading: Radio<_SortVariant>(
+            leading: Radio<int>(
               activeColor: AppColors.green,
-              value: sortVariantsList[6],
+              value: 6,
               groupValue: _character,
               onChanged: (value) {
+                decorator = CategoryReverseDecorator(componentProducts);
                 if (value != null) {
                   setState(() {
                     _character = value;
@@ -199,57 +201,14 @@ class __SortRadioButtonsListWidgetState
           ),
           _SortButtonWidget(
             onPressed: () {
-              Navigator.of(context).pop(_character.comparator);
+              
+              Navigator.of(context).pop(decorator.products);
             },
           )
         ],
       ),
     );
   }
-}
-
-// Класс для хранения способа сортирвки
-class _SortVariant {
-  _SortVariant.none() : comparator = null;
-  _SortVariant.byNameStraight()
-      : comparator = ((a, b) {
-          // Поскольку сортировка по цене и названию влияет только на порядок карточек в категории, но не самих категорий
-          // ТЗ п.1.6 - Порядок категорий — произвольный. Сортировка влияет на порядок товаров внутри категории.
-          if (a.category == b.category) {
-            return a.title.compareTo(b.title);
-          } else {
-            return 0;
-          }
-        });
-  _SortVariant.byNameRevrse()
-      : comparator = ((a, b) {
-          if (a.category == b.category) {
-            return b.title.compareTo(a.title);
-          } else {
-            return 0;
-          }
-        });
-  _SortVariant.byPriceStraight()
-      : comparator = ((a, b) {
-          if (a.category == b.category) {
-            return a.purchaseAmount.compareTo(b.purchaseAmount);
-          } else {
-            return 0;
-          }
-        });
-  _SortVariant.byPriceRevrse()
-      : comparator = ((a, b) {
-          if (a.category == b.category) {
-            return b.purchaseAmount.compareTo(a.purchaseAmount);
-          } else {
-            return 0;
-          }
-        });
-  _SortVariant.byTypeStraight()
-      : comparator = ((a, b) => a.category.name.compareTo(b.category.name));
-  _SortVariant.byTypeRevrse()
-      : comparator = ((a, b) => b.category.name.compareTo(a.category.name));
-  final Comparator<ProductInCart>? comparator;
 }
 
 // Кнопка Сортировать
