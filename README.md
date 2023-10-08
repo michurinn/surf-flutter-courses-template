@@ -4,7 +4,7 @@ You can describe your results in any language that is convenient for you, not ju
 
 ## Description
 
-[Describe what you have done]
+1. A repository of used colors has been created, currently returning local data.
 
 ## How to
 
