@@ -11,16 +11,23 @@ class PalleteScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Эксклюзивная палитра Colored Box'),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        toolbarHeight: 100,
+        foregroundColor: Colors.black,
+        title: const Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Text('Эксклюзивная палитра \n"Colored Box"',style: TextStyle(fontSize: 28,fontWeight: FontWeight.w800),textAlign: TextAlign.start,),
+        ),
       ),
       body: BlocBuilder<ColorsPalleteBloc, ColorsPalleteState>(
         builder: (context, state) {
           switch (state) {
             case ColorsPalleteLoadedState(colors: var colors):
-              return SizedBox(
-                height: MediaQuery.of(context).size.height,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+              return Padding(
+                padding: const EdgeInsets.symmetric(vertical: 30),
+                child: SizedBox(
+                  height: MediaQuery.of(context).size.height,
                   child: GridView.count(
                     crossAxisCount: 3,
                     children: colors
