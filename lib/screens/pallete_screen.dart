@@ -62,15 +62,15 @@ class _ColorInformationPanel extends StatelessWidget {
     return Column(
       children: [
         Flexible(
-          child: Hero(
-            tag: color.name,
-            child: Container(
-              decoration: BoxDecoration(
-                color: color.hexColor,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: const SizedBox.square(
-                dimension: 100,
+          child: AspectRatio(
+            aspectRatio: 1,
+            child: Hero(
+              tag: color.name,
+              child: Container(
+                decoration: BoxDecoration(
+                  color: color.hexColor,
+                  borderRadius: BorderRadius.circular(10),
+                ),
               ),
             ),
           ),
