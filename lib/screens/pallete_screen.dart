@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:surf_flutter_courses_template/bloc/colors_pallete_bloc/colors_pallete_bloc.dart';
 import 'package:surf_flutter_courses_template/domain/color.dart';
+import 'package:surf_flutter_courses_template/extensions/extensions.dart';
+import 'package:surf_flutter_courses_template/interactors/clipboard_write_interactor.dart';
 import 'package:surf_flutter_courses_template/screens/pallete_details_screen.dart';
 
 class PalleteScreen extends StatelessWidget {
@@ -17,7 +19,11 @@ class PalleteScreen extends StatelessWidget {
         foregroundColor: Colors.black,
         title: const Padding(
           padding: EdgeInsets.all(8.0),
-          child: Text('Эксклюзивная палитра \n"Colored Box"',style: TextStyle(fontSize: 28,fontWeight: FontWeight.w800),textAlign: TextAlign.start,),
+          child: Text(
+            'Эксклюзивная палитра \n"Colored Box"',
+            style: TextStyle(fontSize: 28, fontWeight: FontWeight.w800),
+            textAlign: TextAlign.start,
+          ),
         ),
       ),
       body: BlocBuilder<ColorsPalleteBloc, ColorsPalleteState>(
@@ -35,14 +41,36 @@ class PalleteScreen extends StatelessWidget {
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: InkWell(
-                                    onTap: () => Navigator.of(context)
-                                            .push(MaterialPageRoute(
-                                          builder: (context) =>
-                                              PalleteDetailsScreen(
-                                                  colorElement: element),
-                                        )),
-                                    child:
-                                        _ColorInformationPanel(color: element)),
+                                  onLongPress: () async {
+                                    final result = await context
+                                        .read<ClipboardWriteInteractor>()
+                                        .write(element.clearValue);
+                                    // ignore: use_build_context_synchronously
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Center(
+                                          child: result.$1
+                                              ? Text('Hex скопирован'.hardcoded)
+                                              : Text(result.$2),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  onTap: () {
+                                    final writer = context
+                                        .read<ClipboardWriteInteractor>();
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            PalleteDetailsScreen(
+                                                clipboardWriteInteractor:
+                                                    writer,
+                                                colorElement: element),
+                                      ),
+                                    );
+                                  },
+                                  child: _ColorInformationPanel(color: element),
+                                ),
                               )
                             ])
                         .toList(),
