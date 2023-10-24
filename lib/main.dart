@@ -31,12 +31,14 @@ class MainApp extends StatelessWidget {
           ),
         ),
         home: BlocProvider(
+          // Загружает цвета палитры для отображения
           create: (context) => ColorsPalleteBloc(
             colorsRepository: ColorsRepositoryCurrent(),
           )..add(
               ColorsPalleteEventLoad(),
             ),
           child: Provider(
+            // Для сохранения в буфер обмена
             create: (context) => ClipboardWriteInteractor(
                 clipboardWriter: ClipboardWriter.instance),
             child: const PalleteScreen(),

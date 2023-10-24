@@ -3,14 +3,19 @@ import 'package:surf_flutter_courses_template/domain/color.dart';
 import 'package:surf_flutter_courses_template/extensions/extensions.dart';
 import 'package:surf_flutter_courses_template/interactors/clipboard_write_interactor.dart';
 
+// Детальная информация о цвете
 class PalleteDetailsScreen extends StatelessWidget {
   const PalleteDetailsScreen(
       {super.key,
       required this.colorElement,
       required this.clipboardWriteInteractor});
+  // Отображаемый цвет
   final ColorClass colorElement;
+  // Горизонтальный паддинг
   final double kHorizontalPadding = 20;
+  // вертикальный паддинг
   final double kVerticalPadding = 30;
+  // ИНтерактор для записи в буфер обмена
   final ClipboardWriteInteractor clipboardWriteInteractor;
 
   @override
@@ -46,7 +51,6 @@ class PalleteDetailsScreen extends StatelessWidget {
                 vertical: kVerticalPadding, horizontal: kHorizontalPadding),
             child: _FieldWithShadow(
                 text: ['Hex', colorElement.clearValue],
-                writer: clipboardWriteInteractor,
                 onTap: onTap(colorElement.clearValue),
                 showCopyPostfix: true),
           ),
@@ -57,17 +61,17 @@ class PalleteDetailsScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 _FieldWithShadow(
-                    text: ['Red'.hardcoded, colorElement.redPart],
-                    writer: clipboardWriteInteractor,
-                    onTap: onTap(colorElement.redPart)),
+                  text: ['Red'.hardcoded, colorElement.redPart],
+                  onTap: onTap(colorElement.redPart),
+                ),
                 _FieldWithShadow(
-                    text: ['Green'.hardcoded, colorElement.greenPart],
-                    writer: clipboardWriteInteractor,
-                    onTap: onTap(colorElement.redPart)),
+                  text: ['Green'.hardcoded, colorElement.greenPart],
+                  onTap: onTap(colorElement.redPart),
+                ),
                 _FieldWithShadow(
-                    text: ['Blue'.hardcoded, colorElement.bluePart],
-                    writer: clipboardWriteInteractor,
-                    onTap: onTap(colorElement.redPart)),
+                  text: ['Blue'.hardcoded, colorElement.bluePart],
+                  onTap: onTap(colorElement.redPart),
+                ),
               ],
             ),
           ),
@@ -82,16 +86,17 @@ class PalleteDetailsScreen extends StatelessWidget {
   }
 }
 
+// Класс "поля" с информацией, доступной для копирования
 class _FieldWithShadow extends StatefulWidget {
   const _FieldWithShadow(
-      {super.key,
-      required this.text,
-      required this.writer,
+      {required this.text,
       this.showCopyPostfix = false,
       required this.onTap});
+  // Для правильного отображения состоит из 2-х строк: имя - значение
   final List<String> text;
-  final ClipboardWriteInteractor writer;
+  // Показывать постфикс с иконкой Копировать
   final bool showCopyPostfix;
+  // Для вызова по нажатию
   final Future<(bool, String)> onTap;
   @override
   State<_FieldWithShadow> createState() => _FieldWithShadowState();
@@ -104,10 +109,12 @@ class _FieldWithShadowState extends State<_FieldWithShadow> {
       onTap: () async {
         final resultString =
             widget.text.reduce((value, element) => value += ' $element');
+        // запись в буфер, возвращаемый результат записывается
         final result = await widget.onTap;
-
+        // ignore: use_build_context_synchronously
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Center(
+            // Покажем сообщение об ошибке, если нужно
             child: result.$1 ? Text(resultString) : Text(result.$2),
           ),
         ));
@@ -136,6 +143,7 @@ class _FieldWithShadowState extends State<_FieldWithShadow> {
                 .map<Widget>(
                   (element) => Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
+                    // Добавим иконку "Копировать", если showCopyPostfix == true
                     child: (widget.showCopyPostfix &&
                             widget.text.indexOf(element) == 1)
                         ? Row(

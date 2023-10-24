@@ -24,7 +24,7 @@ final class ColorsRepositoryCurrent implements IColorsRepository
     if (colors == null  ) {
       return [];
     }
-    // Здесь придёт мапа а не json ))))
+    // Выберем цвета  с непустым значением цвета
     final notEmptyColors = colors.map((e) => ColorDTO.fromJson(e),).where((element) => element.value != null);
     final result = notEmptyColors.expand((element) => [ColorClass(name: element.name, value: element.value!)]).toList();
     return result;

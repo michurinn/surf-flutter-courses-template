@@ -6,6 +6,7 @@ import 'package:surf_flutter_courses_template/extensions/extensions.dart';
 import 'package:surf_flutter_courses_template/interactors/clipboard_write_interactor.dart';
 import 'package:surf_flutter_courses_template/screens/pallete_details_screen.dart';
 
+// Экран таблицы доступных цветов
 class PalleteScreen extends StatelessWidget {
   const PalleteScreen({super.key});
 
@@ -49,6 +50,7 @@ class PalleteScreen extends StatelessWidget {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
                                         content: Center(
+                                          // Покажем сообщение об ошибке, если нужно
                                           child: result.$1
                                               ? Text('Hex скопирован'.hardcoded)
                                               : Text(result.$2),
@@ -89,7 +91,7 @@ class PalleteScreen extends StatelessWidget {
 }
 
 class _ColorInformationPanel extends StatelessWidget {
-  const _ColorInformationPanel({super.key, required this.color});
+  const _ColorInformationPanel({required this.color});
   final ColorClass color;
 
   @override
@@ -98,6 +100,7 @@ class _ColorInformationPanel extends StatelessWidget {
       children: [
         Flexible(
           child: AspectRatio(
+            // Цвет будет квадратиком
             aspectRatio: 1,
             child: Hero(
               tag: color.name,
