@@ -17,6 +17,7 @@
 в _FieldWithShadow, мне кажется я сделал как-то нелогично ))
 2. В PalleteScreen доступ к ClipboardWriteInteractor осуществляется через Provider, а в PalleteDetailsScreen передаётся в качестве параметра. Наверное, следует сделать единообразно.
 3. Отсутвует ErrorState для ColorsPalleteBloc
+4. Пустые цвета должне отфильтровывать Bloc, а не репозиторий
 ## More
 
 [Here you can brag about what you managed to implement or do something beyond the task]
