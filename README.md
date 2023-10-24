@@ -24,4 +24,4 @@
 
 ## Demo
 
-[Leave links to screencasts/screenshots here, you can use a GitHub repository or a separate cloud service]
+https://disk.yandex.ru/i/6d8rLhPk-hTCVg
