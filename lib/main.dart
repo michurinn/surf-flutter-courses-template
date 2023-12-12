@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:surf_flutter_courses_template/data/themes_repository/themes_repository.dart';
+import 'package:surf_flutter_courses_template/core/local_storage/shared_preferences_local_storage.dart';
+import 'package:surf_flutter_courses_template/core/local_storage/themes_storage.dart';
+import 'package:surf_flutter_courses_template/presentation/screens/profile_screen.dart';
+import 'package:surf_flutter_courses_template/core/theme_interactor/theme_interactor.dart';
 
 void main() {
   runApp(const MainApp());
@@ -9,12 +15,21 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
+    return ChangeNotifierProvider<ThemeInteractor>(
+      create: (BuildContext context) => ThemeInteractor(
+        themesRepository: ThemesRepository(),
+        storage: ThemesStorage(
+          SharedPreferencesLocalStrorage(),
         ),
-      ),
+      )..loadTheme(),
+      builder: (context, child) {
+        final currentTheme = context.watch<ThemeInteractor>().currentTheme;
+        print(' Current theme is $currentTheme');
+        return MaterialApp(
+          theme: currentTheme?.themeData,
+          home: const ProfileScreen(),
+        );
+      },
     );
   }
 }
