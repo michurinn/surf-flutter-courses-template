@@ -67,6 +67,13 @@ class LightGreenTheme implements LightTheme {
                 ),
               ),
               backgroundColor: AppColors.white),
+          cardTheme: const CardTheme(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(16),
+              ),
+            ),
+          ),
           extensions: <ThemeExtension<dynamic>>[
             ThemeColors.lightGreen(),
             ThemeTextStyles.greenLight(),
@@ -102,6 +109,13 @@ class LightBlueTheme implements LightTheme {
                 ),
               ),
               backgroundColor: AppColors.lightBlue),
+          cardTheme: const CardTheme(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(16),
+              ),
+            ),
+          ),
           extensions: <ThemeExtension<dynamic>>[
             ThemeColors.lightPurple(),
             ThemeTextStyles.blueLight(),
@@ -126,10 +140,10 @@ class LightOrangeTheme implements LightTheme {
           radioTheme: const RadioThemeData(
             fillColor: MaterialStatePropertyAll(AppColors.orange),
           ),
-          textTheme: TextTheme().apply(
-              bodyColor: const Color(0xff22215B),
-              displayColor: const Color(0xff22215B),
-            ),
+          textTheme: const TextTheme().apply(
+            bodyColor: const Color(0xff22215B),
+            displayColor: const Color(0xff22215B),
+          ),
           brightness: Brightness.light,
           scaffoldBackgroundColor: AppColors.lightBronze,
           bottomSheetTheme: const BottomSheetThemeData(
@@ -140,6 +154,13 @@ class LightOrangeTheme implements LightTheme {
                 ),
               ),
               backgroundColor: AppColors.lightBronze),
+          cardTheme: const CardTheme(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(16),
+              ),
+            ),
+          ),
           extensions: <ThemeExtension<dynamic>>[
             ThemeColors.lightOrange(),
             ThemeTextStyles.orangeLight(),
@@ -176,6 +197,13 @@ class DarkGreenTheme implements DarkTheme {
             ),
             backgroundColor: AppColors.black,
           ),
+          cardTheme: const CardTheme(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(16),
+              ),
+            ),
+          ),
           extensions: <ThemeExtension<dynamic>>[
             ThemeColors.darkGreen(),
             ThemeTextStyles.greenDark(),
@@ -211,6 +239,13 @@ class DarkBlueTheme implements DarkTheme {
                 ),
               ),
               backgroundColor: AppColors.darkBlue),
+          cardTheme: const CardTheme(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(16),
+              ),
+            ),
+          ),
           extensions: <ThemeExtension<dynamic>>[
             ThemeColors.darkPurple(),
             ThemeTextStyles.blueDark(),
@@ -245,6 +280,13 @@ class DarkOrangeTheme implements DarkTheme {
               ),
             ),
             backgroundColor: AppColors.darkBronze,
+          ),
+          cardTheme: const CardTheme(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(16),
+              ),
+            ),
           ),
           extensions: <ThemeExtension<dynamic>>[
             ThemeColors.darkOrange(),
