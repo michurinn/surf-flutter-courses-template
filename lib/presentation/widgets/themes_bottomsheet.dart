@@ -11,6 +11,7 @@ import 'package:surf_flutter_courses_template/data/extensions/build_context_them
 import 'package:surf_flutter_courses_template/data/extensions/build_context_theme_text_style_extension.dart';
 import 'package:surf_flutter_courses_template/core/theme_interactor/theme_interactor.dart';
 
+// Боттомшит с темами для выбора
 class ThemesBottomsheet extends StatefulWidget {
   const ThemesBottomsheet(
       {super.key,
@@ -28,7 +29,9 @@ class _ThemesBottomsheetState extends State<ThemesBottomsheet>
     with TickerProviderStateMixin {
   late int groupValue;
   late AppTheme? selectedTheme;
+  // Анимация появления/сокрытия подвидов светлых тем
   late final AnimationController _controllerLight;
+  // Анимация появления/сокрытия подвидов тёмных тем
   late final AnimationController _controllerDark;
   late final Animation<double> _animationLight = CurvedAnimation(
     parent: _controllerLight,
@@ -120,6 +123,7 @@ class _ThemesBottomsheetState extends State<ThemesBottomsheet>
                   value: 1,
                   groupValue: groupValue,
                   onChanged: (value) {
+                    // При выборе системный темы подменю сворачиваются
                     _controllerLight.reverse();
                     _controllerDark.reverse();
                     setState(() {
@@ -136,6 +140,7 @@ class _ThemesBottomsheetState extends State<ThemesBottomsheet>
                     setState(() {
                       groupValue = value ?? 1;
                     });
+                    // При выборе светлой темы подменю светлых тем разворачивается, тёмных - сворачивается
                     _controllerLight.forward();
                     _controllerDark.reverse();
                   }),
@@ -158,6 +163,7 @@ class _ThemesBottomsheetState extends State<ThemesBottomsheet>
                     setState(() {
                       groupValue = value ?? 1;
                     });
+                    // При выборе светлой темы подменю тёмных тем разворачивается, светлых - сворачивается
                     _controllerLight.reverse();
                     _controllerDark.forward();
                   }),
@@ -203,12 +209,13 @@ class _ThemesBottomsheetState extends State<ThemesBottomsheet>
 }
 
 // Виджет для отображения вариантов для светлой и тёмной тем
-// TODO(me): Эти темы должны передаваться в качестве параметра
 class _ThemesContainer extends StatefulWidget {
   final List<AppTheme> themes;
   final AppTheme? currentTheme;
-  _ThemesContainer(
-      {required this.onThemeSelected, required this.currentTheme, required this.themes});
+  const _ThemesContainer(
+      {required this.onThemeSelected,
+      required this.currentTheme,
+      required this.themes});
   final Function(AppTheme) onThemeSelected;
   @override
   State<_ThemesContainer> createState() => _ThemesContainerState();
