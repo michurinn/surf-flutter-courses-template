@@ -32,9 +32,21 @@ class ThemeInteractor with ChangeNotifier {
       return false;
     }
   }
-
+  // возвращает текущую темы
   AppTheme? get currentTheme {
     return _currentTheme;
+  }
+
+  // Возвращает светлые темы, описанные  в репозитории
+  List<AppTheme> getLightThemes()
+  {
+    return themesRepository.themes.whereType<LightTheme>().toList();
+  }
+
+  // Возвращает темные темы, описанные  в репозитории
+  List<AppTheme> getDarkThemes()
+  {
+    return themesRepository.themes.whereType<DarkTheme>().toList();
   }
 
   // Читает из хранилища сохранённую тему
