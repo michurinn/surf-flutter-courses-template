@@ -97,7 +97,7 @@ class ProfileScreen extends StatelessWidget {
                     );
                   },
                 );
-                                if (result != null) {
+                if (result != null) {
                   themesInteractor.updateTheme(result);
                 }
               },
