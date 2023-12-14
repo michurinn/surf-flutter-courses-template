@@ -12,8 +12,14 @@ import 'package:surf_flutter_courses_template/data/extensions/build_context_them
 import 'package:surf_flutter_courses_template/core/theme_interactor/theme_interactor.dart';
 
 class ThemesBottomsheet extends StatefulWidget {
-  const ThemesBottomsheet({super.key, required this.currentTheme});
+  const ThemesBottomsheet(
+      {super.key,
+      required this.currentTheme,
+      required this.darkThemes,
+      required this.lightThemes});
   final AppTheme? currentTheme;
+  final List<AppTheme> darkThemes;
+  final List<AppTheme> lightThemes;
   @override
   State<ThemesBottomsheet> createState() => _ThemesBottomsheetState();
 }
@@ -68,8 +74,7 @@ class _ThemesBottomsheetState extends State<ThemesBottomsheet>
   @override
   Widget build(BuildContext context) {
     final themesInteractor = context.watch<ThemeInteractor>();
-    final textStyles = themesInteractor.currentTheme?.themeData
-        ?.extensions[ThemeTextStyles] as ThemeTextStyles?;
+    final textStyles = context.themeTextStyle;
     return Wrap(
       spacing: 10,
       children: [
@@ -136,7 +141,8 @@ class _ThemesBottomsheetState extends State<ThemesBottomsheet>
                   }),
               SizeTransition(
                 sizeFactor: _animationLight,
-                child: _ThemesContainer.light(
+                child: _ThemesContainer(
+                  themes: widget.lightThemes,
                   currentTheme: selectedTheme,
                   onThemeSelected: (AppTheme theme) {
                     selectedTheme = theme;
@@ -157,7 +163,8 @@ class _ThemesBottomsheetState extends State<ThemesBottomsheet>
                   }),
               SizeTransition(
                 sizeFactor: _animationDark,
-                child: _ThemesContainer.dark(
+                child: _ThemesContainer(
+                  themes: widget.darkThemes,
                   currentTheme: selectedTheme,
                   onThemeSelected: (AppTheme theme) {
                     selectedTheme = theme;
@@ -165,7 +172,7 @@ class _ThemesBottomsheetState extends State<ThemesBottomsheet>
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(bottom: 20.0, top:20),
+                padding: const EdgeInsets.only(bottom: 20.0, top: 20),
                 child: OutlinedButton(
                   onPressed: () {
                     Navigator.of(context).pop(selectedTheme);
@@ -178,7 +185,10 @@ class _ThemesBottomsheetState extends State<ThemesBottomsheet>
                   child: const Row(
                     children: [
                       Expanded(
-                        child: Text('Готово',textAlign: TextAlign.center,),
+                        child: Text(
+                          'Готово',
+                          textAlign: TextAlign.center,
+                        ),
                       ),
                     ],
                   ),
@@ -192,15 +202,13 @@ class _ThemesBottomsheetState extends State<ThemesBottomsheet>
   }
 }
 
+// Виджет для отображения вариантов для светлой и тёмной тем
+// TODO(me): Эти темы должны передаваться в качестве параметра
 class _ThemesContainer extends StatefulWidget {
-  late final List<AppTheme> themes;
+  final List<AppTheme> themes;
   final AppTheme? currentTheme;
-  _ThemesContainer.light(
-      {required this.onThemeSelected, required this.currentTheme})
-      : themes = [LightGreenTheme(), LightBlueTheme(), LightOrangeTheme()];
-  _ThemesContainer.dark(
-      {required this.onThemeSelected, required this.currentTheme})
-      : themes = [DarkGreenTheme(), DarkBlueTheme(), DarkOrangeTheme()];
+  _ThemesContainer(
+      {required this.onThemeSelected, required this.currentTheme, required this.themes});
   final Function(AppTheme) onThemeSelected;
   @override
   State<_ThemesContainer> createState() => _ThemesContainerState();
@@ -223,11 +231,13 @@ class _ThemesContainerState extends State<_ThemesContainer> {
 
   @override
   Widget build(BuildContext context) {
-    final themesInteractor = context.watch<ThemeInteractor>();
-    final textStyles = themesInteractor.currentTheme?.themeData
-        ?.extensions[ThemeTextStyles] as ThemeTextStyles?;
+    // доступные для текущей темы textStyles
+    final textStyles = context.themeTextStyle;
+    // доступные для текущей темы ThemeColors
+    final ThemeColors? currentThemeColors = context.color;
+    // Полученный из ThemeColors цвет фона
     final changeThemeBottomSheetExamplesBackgroundColor =
-        context.color?.changeThemeBottomSheetExamplesBackgroundColor;
+        currentThemeColors?.changeThemeBottomSheetExamplesBackgroundColor;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -240,7 +250,8 @@ class _ThemesContainerState extends State<_ThemesContainer> {
         ),
         Row(
           children: widget.themes.expand((element) {
-            final tmp =
+            // Для отрисовки кружков _GridColoredCircleElement для каждой темы (здесь element) понадобятся цвета этой темы и цвета шрифтов
+            final selectedElementThemeColors =
                 element.themeData?.extensions[ThemeColors] as ThemeColors;
             final textStyle = element.themeData?.extensions[ThemeTextStyles]
                 as ThemeTextStyles;
@@ -284,7 +295,8 @@ class _ThemesContainerState extends State<_ThemesContainer> {
                                         textStyle.secondaryTextFieldStyle.color,
                                   ),
                                   _GridColoredCircleElement(
-                                    color: tmp.appBarActionTextColor,
+                                    color: selectedElementThemeColors
+                                        .appBarActionTextColor,
                                   ),
                                   const _GridColoredCircleElement(
                                     color: AppColors.white,
@@ -301,6 +313,7 @@ class _ThemesContainerState extends State<_ThemesContainer> {
                             child: Text(
                               element.name,
                               style:
+                                  // Цвет текста на выделенной теме отличается
                                   checkedIndex == widget.themes.indexOf(element)
                                       ? textStyles?.themesBottomSheetLabelStyle
                                           .copyWith(
@@ -325,6 +338,7 @@ class _ThemesContainerState extends State<_ThemesContainer> {
   }
 }
 
+// Виджет для отображения кружка заданного цвета
 class _GridColoredCircleElement extends StatelessWidget {
   final Color? color;
   const _GridColoredCircleElement({super.key, required this.color});
