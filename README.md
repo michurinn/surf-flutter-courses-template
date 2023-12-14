@@ -35,4 +35,4 @@ SharedPreferencesLocalStrorage для работы с локальным хра�
 
 ## Demo
 
-[Leave links to screencasts/screenshots here, you can use a GitHub repository or a separate cloud service]
+В папке /demo/
