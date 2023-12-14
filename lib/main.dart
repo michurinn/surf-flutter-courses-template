@@ -24,7 +24,6 @@ class MainApp extends StatelessWidget {
       )..loadTheme(),
       builder: (context, child) {
         final currentTheme = context.watch<ThemeInteractor>().currentTheme;
-        print(' Current theme is $currentTheme');
         return MaterialApp(
           theme: currentTheme?.themeData,
           home: const ProfileScreen(),
