@@ -8,6 +8,7 @@ import 'package:surf_flutter_courses_template/data/extensions/build_context_them
 import 'package:surf_flutter_courses_template/data/extensions/build_context_theme_text_style_extension.dart';
 import 'package:surf_flutter_courses_template/core/theme_interactor/theme_interactor.dart';
 import 'package:surf_flutter_courses_template/presentation/widgets/themes_bottomsheet.dart';
+
 // Экран профиля
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -91,10 +92,12 @@ class ProfileScreen extends StatelessWidget {
                   builder: (context) {
                     return ThemesBottomsheet(
                       currentTheme: themesInteractor.currentTheme,
+                      darkThemes: themesInteractor.getDarkThemes(),
+                      lightThemes: themesInteractor.getLightThemes(),
                     );
                   },
                 );
-                if (result != null) {
+                                if (result != null) {
                   themesInteractor.updateTheme(result);
                 }
               },
@@ -137,42 +140,40 @@ class _TextFieldState extends State<_TextField> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: widget.onPressed,
-      child: Container(
-        height: 50,
-        decoration: BoxDecoration(
-            borderRadius: const BorderRadius.all(
-              Radius.circular(10),
-            ),
-            color: context.color?.profileScreenChipsBackgroundColor),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10.0),
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      widget.label,
-                      style: context.themeTextStyle?.secondaryTextFieldStyle,
-                    ),
-                    Text(
-                      widget.text,
-                      style: context.themeTextStyle?.primaryTextFieldStyle,
-                    ),
-                  ]),
-            ),
-            if (widget.editable)
-              IconButton(
-                onPressed: widget.onPressed,
-                icon: Icon(
-                  Icons.arrow_forward_ios,
-                  size: 18,
-                  color: context.color?.appBarActionTextColor,
-                ),
-              )
-          ],
+      child: Card(
+        color: context.color?.profileScreenChipsBackgroundColor,
+        child: SizedBox(
+          height: 50,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        widget.label,
+                        style: context.themeTextStyle?.secondaryTextFieldStyle,
+                      ),
+                      Text(
+                        widget.text,
+                        style: context.themeTextStyle?.primaryTextFieldStyle,
+                      ),
+                    ]),
+              ),
+              if (widget.editable)
+                IconButton(
+                  onPressed: widget.onPressed,
+                  icon: Icon(
+                    Icons.arrow_forward_ios,
+                    size: 18,
+                    color: context.color?.appBarActionTextColor,
+                  ),
+                )
+            ],
+          ),
         ),
       ),
     );
