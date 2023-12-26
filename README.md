@@ -1,23 +1,18 @@
 # Description of your result
 
-You can describe your results in any language that is convenient for you, not just English.
+Реализовано приложение, состоящее из 2 экранов - экран отображения всех фотографий пользователя и экран детального отображения выбранной фотографии.
 
 ## Description
 
-[Describe what you have done]
-
-## How to
-
-[Describe how to run your application if there are any issues]
+1. Данные: данные предоставляются репозиторием IProfilePictureRepository, а именно его реализацией ProfilePictureRepository. Данные
+являются моковыми и представляют собой ссылки на изображения, используемые впоследствии в виджетах Image.network.
+2. Доступ к данным предоставляет интерактор ProfilePicturesInteractor.
+3. UI: приложение состоит из 2 экранов. Главный экран отображает полученные данные в виде Grid, по нажатию на элемент которой происходит переход на 2-ой экран. Этот экран содержит PageView.
 
 ## Problems
 
-[Describe the problems you encountered]
-
-## More
-
-[Here you can brag about what you managed to implement or do something beyond the task]
+Простая задача)
 
 ## Demo
 
-[Leave links to screencasts/screenshots here, you can use a GitHub repository or a separate cloud service]
+demo/video_2023-12-26_09-30-44.mp4
