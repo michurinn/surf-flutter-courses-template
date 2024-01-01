@@ -29,7 +29,7 @@ You can describe your results in any language that is convenient for you, not ju
 ## Problems
 
 🟠 BlocBuilder<MagicBallCubit, MagicBallState> должен быть непосредственно над виджетом, который он перерисовывает, а не над всем поддеревом.
-
+🟢 ScreenUtils использовался в экспериментальных целях
 ## More
 
 [Here you can brag about what you managed to implement or do something beyond the task]
