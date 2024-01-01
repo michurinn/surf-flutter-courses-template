@@ -16,12 +16,16 @@ class MagicBallCubit extends Cubit<MagicBallState> {
   // Репозиторий для получения ответов от шара
   final MagicBallAnswersRepository _magicBallAnswersRepository;
   // Определяет когда пользователь трясёт телефон
+  // ignore: unused_field
   late final ShakeDetector _shakeDetector;
   // В состоянии получения ответа запрос новых событий невозможен
   bool _isLoading = false;
 
   // Даёт ответ на вопрос
   void getAnswer() async {
+    if (_isLoading) {
+      return;
+    }
     emit(MagicBallProcessingState());
     _isLoading = true;
     try {
