@@ -28,7 +28,7 @@ You can describe your results in any language that is convenient for you, not ju
 
 ## Problems
 
-BlocBuilder<MagicBallCubit, MagicBallState> должен быть непосредственно над виджетом, который он перерисовывает, а не над всем поддеревом.
+🟠 BlocBuilder<MagicBallCubit, MagicBallState> должен быть непосредственно над виджетом, который он перерисовывает, а не над всем поддеревом.
 
 ## More
 
