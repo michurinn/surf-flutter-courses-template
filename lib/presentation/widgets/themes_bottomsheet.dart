@@ -99,8 +99,8 @@ class _ThemesBottomsheetState extends State<ThemesBottomsheet>
                     children: [
                       Text(
                         'Тема оформления',
-                        style: themesInteractor.currentTheme?.themeData
-                            ?.appBarTheme.titleTextStyle,
+                        style: themesInteractor
+                            .currentTheme.themeData?.appBarTheme.titleTextStyle,
                       ),
                       IconButton(
                         onPressed: () {
@@ -140,6 +140,8 @@ class _ThemesBottomsheetState extends State<ThemesBottomsheet>
                     setState(() {
                       groupValue = value ?? 1;
                     });
+                    // При выборе RadioButton светлых тем автоматически считается выбранной первая в списке
+                    selectedTheme = widget.lightThemes[0];
                     // При выборе светлой темы подменю светлых тем разворачивается, тёмных - сворачивается
                     _controllerLight.forward();
                     _controllerDark.reverse();
@@ -164,6 +166,8 @@ class _ThemesBottomsheetState extends State<ThemesBottomsheet>
                       groupValue = value ?? 1;
                     });
                     // При выборе светлой темы подменю тёмных тем разворачивается, светлых - сворачивается
+                    // При выборе RadioButton тёмных тем автоматически считается выбранной первая в списке
+                    selectedTheme = widget.darkThemes[0];
                     _controllerLight.reverse();
                     _controllerDark.forward();
                   }),
@@ -228,8 +232,7 @@ class _ThemesContainerState extends State<_ThemesContainer> {
   initState() {
     super.initState();
     checkedIndex = switch (widget.currentTheme) {
-      SystemTheme() => -1,
-      null => -1,
+      SystemTheme()|| null => 0,
       LightGreenTheme() || DarkGreenTheme() => 0,
       LightBlueTheme() || DarkBlueTheme() => 1,
       LightOrangeTheme() || DarkOrangeTheme() => 2,
