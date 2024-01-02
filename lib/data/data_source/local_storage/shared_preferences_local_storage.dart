@@ -1,9 +1,9 @@
 import 'dart:ffi';
 
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:surf_flutter_courses_template/core/local_storage/local_storage_abstract.dart';
+import 'package:surf_flutter_courses_template/data/data_source/local_storage/local_storage_abstract.dart';
 // Реализация LocalStorage с использованием плагина SharedPreferences и паттерна singleton
-class SharedPreferencesLocalStrorage implements LocalStorage {
+class SharedPreferencesLocalStrorage implements ILocalStorageDataSource {
   SharedPreferencesLocalStrorage._internal();
 
   static final SharedPreferencesLocalStrorage _instance =
@@ -27,10 +27,6 @@ class SharedPreferencesLocalStrorage implements LocalStorage {
   void set<T>(String key, T value) async {
     final prefs = await SharedPreferences.getInstance();
     switch (T) {
-      // ignore: prefer_void_to_null
-      case Null:
-        prefs.remove(key);
-        break;
       case String:
         prefs.setString(key, value as String);
       case Bool:

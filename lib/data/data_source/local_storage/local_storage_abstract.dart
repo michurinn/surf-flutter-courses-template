@@ -1,5 +1,5 @@
 // Класс для чтения/записи данных из локального хранилища
-abstract class LocalStorage {
+abstract interface class ILocalStorageDataSource {
   /// Получить значение из хранилища по ключу [key].
   Future<(T?, bool)> getByKey<T>(String key);
 

@@ -1,76 +1,45 @@
 import 'package:flutter/foundation.dart';
 import 'package:surf_flutter_courses_template/data/themes_repository/themes_repository.dart';
 import 'package:surf_flutter_courses_template/domain/app_theme.dart';
-import 'package:surf_flutter_courses_template/core/local_storage/themes_storage.dart';
 
 // Интепактор для сохранения и получения сохранённой темы
 class ThemeInteractor with ChangeNotifier {
-  final ThemesStorage storage;
   final ThemesRepository themesRepository;
-  ThemeInteractor({required this.storage, required this.themesRepository});
-
-  AppTheme? _currentTheme;
+  ThemeInteractor({required this.themesRepository});
+  // Дефлотная тема, применятеся при инициализации пока не загрузилась необходимая тема
+  AppTheme _currentTheme = SystemTheme();
 
   // Сохраняет полученную тему как выбранную
-  bool _saveTheme(AppTheme theme) {
-    try {
-      storage.setTheme(theme.name);
-      return true;
-    } on Exception catch (_) {
-      return false;
-    }
+  void _saveTheme(AppTheme theme) {
+    themesRepository.saveTheme(theme.name);
   }
 
   /// Обновляет текущую тему и сохраняет её в локальное хранилище
-  bool updateTheme(AppTheme theme) {
-    try {
-      _saveTheme(theme);
-      _currentTheme = theme;
-      notifyListeners();
-      return true;
-    } on Exception catch (_) {
-      return false;
-    }
+  void updateTheme(AppTheme theme) {
+    _saveTheme(theme);
+    _currentTheme = theme;
+    notifyListeners();
   }
+
   // возвращает текущую темы
-  AppTheme? get currentTheme {
+  AppTheme get currentTheme {
     return _currentTheme;
   }
 
   // Возвращает светлые темы, описанные  в репозитории
-  List<AppTheme> getLightThemes()
-  {
-    return themesRepository.themes.whereType<LightTheme>().toList();
+  List<AppTheme> getLightThemes() {
+    return themesRepository.lightThemes;
   }
 
   // Возвращает темные темы, описанные  в репозитории
-  List<AppTheme> getDarkThemes()
-  {
-    return themesRepository.themes.whereType<DarkTheme>().toList();
+  List<AppTheme> getDarkThemes() {
+    return themesRepository.darkThemes;
   }
 
   // Читает из хранилища сохранённую тему
   void loadTheme() async {
-    try {
-      final List<AppTheme> themes = themesRepository.themes;
-      final String? result = await storage.getTheme;
-      // Если тема не сохранена в хранилище, установим SystemTheme
-      if (result == null) {
-        _currentTheme = SystemTheme();
-        notifyListeners();
-        return;
-      }
-      // Если имя темы, сохранённой в хранилище, не соответсвует какой-либо теме из репозитория, установим SystemTheme
-      final theme = themes.firstWhere(
-        (element) => element.name == result,
-        orElse: () => SystemTheme(),
-      );
-      _currentTheme = theme;
-      notifyListeners();
-    } catch (_) {
-      // При возникновении ошибки установим SystemTheme
-      _currentTheme = SystemTheme();
-      notifyListeners();
-    }
+    _currentTheme = await themesRepository.getCurrentTheme();
+    notifyListeners();
+    return;
   }
 }
