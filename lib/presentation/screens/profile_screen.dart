@@ -48,7 +48,7 @@ class ProfileScreen extends StatelessWidget {
               child: Text(
                 'Edit',
                 style: themesInteractor
-                    .currentTheme?.themeData?.primaryTextTheme.titleMedium,
+                    .currentTheme.themeData?.primaryTextTheme.titleMedium,
               ),
             ),
             Center(
@@ -84,7 +84,7 @@ class ProfileScreen extends StatelessWidget {
             ),
             _TextField(
               label: 'Тема оформления',
-              text: themesInteractor.currentTheme?.name ?? 'Неизвестно',
+              text: themesInteractor.currentTheme.name,
               editable: true,
               onPressed: () async {
                 final result = await showModalBottomSheet<AppTheme>(
