@@ -1,17 +1,14 @@
+// Стейты экрана формы регистрации питомцев
+sealed class PetRegistrationScreenState {}
 
-sealed class PetRegistrationScreenState
-{
+// Инициирующий стейт, нет введённых данных
+class NoData extends PetRegistrationScreenState {}
 
-}
+// Форма не прошла валидацию или не заполнена
+class ErrorState extends PetRegistrationScreenState {}
 
-class NoData extends  PetRegistrationScreenState {
-  
-}
+// Загрузка, де факто не используется
+class LoadingState extends PetRegistrationScreenState {}
 
-class ErrorState extends  PetRegistrationScreenState {
-  
-}
-
-class LoadingState extends  PetRegistrationScreenState {
-  
-}
+// Всё готово к отправке
+class ReadyState extends PetRegistrationScreenState {}
