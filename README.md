@@ -1,22 +1,20 @@
-# Description of your result
-
-You can describe your results in any language that is convenient for you, not just English.
 
 ## Description
 
-[Describe what you have done]
+Реализована форма заполнения данных о питомце.
 
-## How to
+🔹используется ValueListenable для регулирования отображения сведений о вакцинах
+🔹все поля объединены Form для общей валидации
+🔹Стейты экрана управляются PetRegistrationScreenInteractor. На основании стейта определяется доступность кнопки.
 
-[Describe how to run your application if there are any issues]
 
 ## Problems
 
-[Describe the problems you encountered]
+Поля формы проверяются не по отдельности.
 
 ## More
 
-[Here you can brag about what you managed to implement or do something beyond the task]
+demo/doc_2024-01-22_18-24-38.mp4
 
 ## Demo
 
