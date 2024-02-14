@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:surf_flutter_courses_template/extensions/string_hardcoded_extension.dart';
+import 'package:surf_flutter_courses_template/extensions/string_validate_email_extension.dart';
 import 'package:surf_flutter_courses_template/feauters/pet_registration/widget/pet_form_field.dart';
 
 // Виджет для отображения полей с прививками питомца
@@ -85,7 +85,7 @@ class __PetVaccinationsCheckedTileState
             label: 'Дата последней прививки',
             withDatePicker: true,
             validator: (string) {
-              return (string == null || string == '')
+              return (string == null || string.isEmpty)
                   ? 'Укажите дату дд/мм/гггг'
                   : null;
             },

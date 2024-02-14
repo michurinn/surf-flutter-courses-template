@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:surf_flutter_courses_template/extensions/string_hardcoded_extension.dart';
+import 'package:surf_flutter_courses_template/extensions/string_validate_email_extension.dart';
 import 'package:surf_flutter_courses_template/feauters/pet_registration/domain/pet_type.dart';
 import 'package:surf_flutter_courses_template/feauters/pet_registration/widget/pet_widget.dart';
 

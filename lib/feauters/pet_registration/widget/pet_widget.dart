@@ -19,7 +19,7 @@ class PetWidget extends StatelessWidget {
       onTap: onChanged,
       child: Column(
         children: [
-          Container(
+          DecoratedBox(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16),
               color: isChecked ? const Color(0xFFFF8087) : Colors.white,

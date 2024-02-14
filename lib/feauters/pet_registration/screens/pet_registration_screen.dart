@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:surf_flutter_courses_template/extensions/string_hardcoded_extension.dart';
 import 'package:surf_flutter_courses_template/extensions/string_validate_email_extension.dart';
 import 'package:surf_flutter_courses_template/feauters/pet_registration/di/interactors/pet_registration_screen_interactor.dart';
 import 'package:surf_flutter_courses_template/feauters/pet_registration/di/states/pet_registration_screen_states.dart';
@@ -119,7 +118,7 @@ class _PetRegistrationSrceenState extends State<PetRegistrationSrceen> {
                       // Область с вакцинами
                       ValueListenableBuilder(
                         valueListenable: _showVaccines,
-                        builder: (context, value, child) {
+                        builder: (_, value, __) {
                           return value
                               ? const PetvaccinationsWidget()
                               : const SizedBox.shrink();

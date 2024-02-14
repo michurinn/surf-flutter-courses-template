@@ -5,8 +5,8 @@ import 'package:intl/intl.dart';
 // Элемент текстового поля ввода
 class PetFormField extends StatefulWidget {
   const PetFormField({
-    super.key,
     required this.label,
+    super.key,    
     this.validator,
     this.withDatePicker = false,
     this.keyboardType = TextInputType.name,
@@ -38,7 +38,7 @@ class _PetFormFieldState extends State<PetFormField> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return DecoratedBox(
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),

@@ -16,7 +16,7 @@ class _AppState extends State<App> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Provider(
-        create: (context) => PetRegistrationScreenInteractor(),
+        create: (_) => PetRegistrationScreenInteractor(),
         child: const PetRegistrationSrceen(),
       ),
     );
