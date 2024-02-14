@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:surf_flutter_courses_template/extensions/string_hardcoded_extension.dart';
-import 'package:surf_flutter_courses_template/extensions/string_trim_whitespaces_extension.dart';
 import 'package:surf_flutter_courses_template/extensions/string_validate_email_extension.dart';
 import 'package:surf_flutter_courses_template/feauters/pet_registration/di/interactors/pet_registration_screen_interactor.dart';
 import 'package:surf_flutter_courses_template/feauters/pet_registration/di/states/pet_registration_screen_states.dart';
@@ -74,7 +73,7 @@ class _PetRegistrationSrceenState extends State<PetRegistrationSrceen> {
                         PetFormField(
                           label: 'Имя питомца',
                           validator: (string) =>
-                              (string != null && string.trimmed.length < 3)
+                              (string != null && string.trim().length < 3)
                                   ? 'Укажите имя питомца от 3 до 20 символов'
                                   : null,
                         ),
@@ -82,7 +81,7 @@ class _PetRegistrationSrceenState extends State<PetRegistrationSrceen> {
                           label: 'День рождения питомца',
                           withDatePicker: true,
                           validator: (string) {
-                            return (string == null || string.trimmed == '')
+                            return (string == null || string.trim() == '')
                                 ? 'Укажите дату дд/мм/гггг'
                                 : null;
                           },
@@ -107,7 +106,7 @@ class _PetRegistrationSrceenState extends State<PetRegistrationSrceen> {
                         PetFormField(
                           label: 'Почта хозяина',
                           validator: (string) =>
-                              (string == null || !string.trimmed.isValidEmail)
+                              (string == null || !string.trim().isValidEmail)
                                   ? 'Укажите email в формате ya@molodec.com'
                                   : null,
                         )
