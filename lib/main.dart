@@ -13,6 +13,7 @@ void main() {
 
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
+  // ```dart return Consumer( builder: (_, themeProvider, __) => MaterialApp( theme: themeProvider.currentTheme.themeData, home: const ProfileScreen(), ), );
 
   @override
   Widget build(BuildContext context) {
@@ -26,10 +27,11 @@ class MainApp extends StatelessWidget {
         ),
       )..loadTheme(),
       builder: (context, child) {
-        final currentTheme = context.watch<ThemeInteractor>().currentTheme;
-        return MaterialApp(
-          theme: currentTheme.themeData,
-          home: const ProfileScreen(),
+        return Consumer<ThemeInteractor>(
+          builder: (_, themeProvider, __) => MaterialApp(
+            theme: themeProvider.currentTheme.themeData,
+            home: const ProfileScreen(),
+          ),
         );
       },
     );
